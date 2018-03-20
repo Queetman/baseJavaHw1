@@ -80,7 +80,7 @@ public class ArrayStorage {
 
         return notNullResume;
     }*/
-//вап 2 поучше
+//вар 2 получше
     Resume[] getAll() {
 
         Resume[] resumeWithutNull;

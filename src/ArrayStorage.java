@@ -1,28 +1,27 @@
 import java.util.Arrays;
 
 /**
- *Скорректированный вариант в соответствии с замечаниями:
- * 1) не оставляй в коде так называемых "якорей" - закомментированного кода
- 2) зачем ты в конструкторе инициализируешь все ячейки storage, Resume с uuid = zzz?
- 3) в clear() заполняй ячейки массива null
- 4) для того что бы не подсчитывать каждый раз в методе size() длину массива, заведи дополнительное поле size
- используя эту переменную, реализация многих методов частично изменится
- 5) в методе get() возвращай сразу storage[i] или null. Первые три строчки лишние
- 6) по заданию у нас в массиве не может быть "дырок". Это значит, что все элементы плотно прилегают друг к другу. При удалении учитывай это. Ни null ни zzz не должно быть между элементами
- 7) порядок элементов в getAll() нам пока не нужен. Просто возвращай Arrays.copyOfRange()
+ * 1) если ты делаешь подобные переменные
+ * private int storageLength = 10000;
+ * то они должны быть final
+ * <p>
+ * 2) поле size не завел. Реализация методов изменится
+ * 3) в методе size возвращай значение поля size
+ * 4) в методе clear воспользуйся для обнуления массива методом Arrays.fill
+ * 5) в методе get СРАЗУ возвращай результат либо null
+ * 6) в методе get
+ * storage[i].toString().equals(uuid)                  - этот кусок кода был в методе delete. Там и исправил
+ * у нас в массиве хранятся Resume, а не String
+ * нужно брать у Resume uuid и проерять его с тем, который пришел в метод
  */
 public class ArrayStorage {
 
-    private int storageLength = 10000;
+    private final int storageLength = 10000;
     private Resume[] storage = new Resume[storageLength];
+    private int size;
 
     void clear() {
-
-        if (size() != 0) {
-            for (int i = 0; i < storage.length; i++) {
-                storage[i] = null;
-            }
-        } else System.out.println("Storage is empty");
+        Arrays.fill(storage, null);
     }
 
     //если ячейка пуста - сохранеиие.
@@ -37,16 +36,13 @@ public class ArrayStorage {
 
     Resume get(String uuid) {
 
-        Resume resume = null;
+        size = size();
 
-        for (int i = 0; i < size(); i++) {
-            if (storage[i].uuid.equals(uuid)) {
-                resume = storage[i];
-                break;
-
-            } else resume = null;
+        for (int i = 0; i < size; i++) {
+            if (storage[i].uuid.equals(uuid))
+                return storage[i];
         }
-        return resume;
+        return null;
     }
 
     void delete(String uuid) {
@@ -54,7 +50,7 @@ public class ArrayStorage {
 
 //поиск номера элемента на удаление
         for (int i = 0; i < storage.length; i++) {
-            if (storage[i].toString().equals(uuid)) {
+            if (storage[i].uuid.equals(uuid)) {
                 j = i;
                 break;
             }
@@ -69,15 +65,19 @@ public class ArrayStorage {
 
     Resume[] getAll() {
 
-        return Arrays.copyOfRange(storage, 0, size());
+        size = size();
+
+        return Arrays.copyOfRange(storage, 0, size);
     }
 
     int size() {
-        int i = 0;
+        int arrSize = 0;
 
         for (Resume aStorage : storage) {
-            if (aStorage != null) i++;
+            if (aStorage != null) arrSize++;
+            else break;
         }
-        return i;
+
+        return arrSize;
     }
 }

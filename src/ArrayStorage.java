@@ -1,10 +1,15 @@
 import java.util.Arrays;
 
 /**
- * ) у финальных переменных (storageLength) имена пишутся большими буквами - вот так STORAGE_LENGTH
- * 2) перед каждым коммитом выделяй код и нажимай Ctrl + Alt + L
- * 3) метод delete() написан так, что, если в массиве нет ресюме и мы ничего не удаляем, то size-- все равно отрабатывает
- * поставь size-- после j = i;
+ Привет
+ 1) storage[size()] = r;
+ сразу обращайся к полю size в обход метода size()
+ 2) в методе delete нам не нужно проверять весь массив, т.к. большая его часть заполнена null
+ лучше написать i < size
+ 3) также в методе delete получается такая штука, что
+ если мы не находим в массиве резюме, которое нужно удалить (это первый цикл) и доходим до его последней ячейки,
+ то после этого мы спокойненько переходим ко второму циклу (что, согласись не имеет смысла, если мы не нашли, что удалять) и снова проходим весь массив. Более того мы начинаем сдвигать его элементы, затирая резюме по адресу storage[0]
+ 4) Arrays.copyOfRange в нашем случаем можно заменить на Arrays.copyOf
  */
 public class ArrayStorage {
 
@@ -19,7 +24,7 @@ public class ArrayStorage {
 
     //если ячейка пуста - сохранеиие.
     void save(Resume r) {
-        storage[size()] = r;
+        storage[size] = r;
         size++;
     }
 
@@ -32,24 +37,27 @@ public class ArrayStorage {
     }
 
     void delete(String uuid) {
-        int j = 0;
+        int j = -1;
 
 //поиск номера элемента на удаление
-        for (int i = 0; i < STORAGE_LENGTH; i++) {
+        for (int i = 0; i <size; i++) {
             if (storage[i].uuid.equals(uuid)) {
                 j = i;
                 size--;
                 break;
             }
         }
-        //Сдвиг элементов, чтобы избежжать дырок в массиве
-        for (int i = j; i < STORAGE_LENGTH - 1; i++) {
-            storage[i] = storage[i + 1];
+        //если есть элемент для удаления
+        if(j!=-1) {
+            //Сдвиг элементов, чтобы избежжать дырок в массиве
+            for (int i = j; i < STORAGE_LENGTH-1; i++) {
+                storage[i] = storage[i + 1];
+            }
         }
     }
 
     Resume[] getAll() {
-        return Arrays.copyOfRange(storage, 0, size);
+        return Arrays.copyOf(storage, size);
     }
 
     int size() {

@@ -53,9 +53,7 @@ public class ArrayStorage {
                 break;
             }
         }
-
         shiftElement(j);
-
     }
 
     Resume[] getAll() {

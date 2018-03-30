@@ -1,7 +1,9 @@
 import java.util.Arrays;
 
 /**
- * =
+ * по поводу метда delete
+ * у тебя же есть уже готовый метод get для поиска резюме
+ * используй его
  */
 public class ArrayStorage {
 

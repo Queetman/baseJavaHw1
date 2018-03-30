@@ -1,12 +1,14 @@
 import java.util.Arrays;
 
-/**=
+/**
+ * =
  */
 public class ArrayStorage {
 
     private final int STORAGE_LENGTH = 10000;
     private Resume[] storage = new Resume[STORAGE_LENGTH];
     private int size = 0;
+    private int deleteNumber = -1;
 
     void clear() {
         Arrays.fill(storage, 0, size, null);
@@ -21,6 +23,7 @@ public class ArrayStorage {
     Resume get(String uuid) {
         for (int i = 0; i < size; i++) {
             if (storage[i].uuid.equals(uuid)) {
+                deleteNumber = i;
                 return storage[i];
             }
         }
@@ -28,17 +31,11 @@ public class ArrayStorage {
     }
 
     void delete(String uuid) {
-        int j = -1;
 
-        for (int i = 0; i < size; i++) {
-            if (storage[i].uuid.equals(uuid)) {
-                j = i;
-
-                size--;
-                break;
-            }
+        if (get(uuid) != null) {
+            size--;
+            replace(deleteNumber);
         }
-        replace(j);
     }
 
     Resume[] getAll() {

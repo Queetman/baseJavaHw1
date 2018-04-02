@@ -1,16 +1,13 @@
 import java.util.Arrays;
 
 /**
- * по поводу метда delete
- * у тебя же есть уже готовый метод get для поиска резюме
- * используй его
+
  */
 public class ArrayStorage {
 
     private final int STORAGE_LENGTH = 10000;
     private Resume[] storage = new Resume[STORAGE_LENGTH];
     private int size = 0;
-    private int deleteNumber = -1;
 
     void clear() {
         Arrays.fill(storage, 0, size, null);
@@ -25,7 +22,6 @@ public class ArrayStorage {
     Resume get(String uuid) {
         for (int i = 0; i < size; i++) {
             if (storage[i].uuid.equals(uuid)) {
-                deleteNumber = i;
                 return storage[i];
             }
         }
@@ -33,23 +29,28 @@ public class ArrayStorage {
     }
 
     void delete(String uuid) {
+        int deleteIndex = -1;
 
-        if (get(uuid) != null) {
-            size--;
-            replace(deleteNumber);
+        for (int i = 0; i < size; i++) {
+            if (storage[i].uuid.equals(uuid)) {
+                deleteIndex = i;
+                size--;
+                break;
+            }
+        }
+        replace(deleteIndex);
+    }
+
+    private void replace(int deleteIndex) {
+        if (deleteIndex != -1) {
+            storage[deleteIndex] = storage[size];
+            storage[size] = null;
+
         }
     }
 
     Resume[] getAll() {
         return Arrays.copyOf(storage, size);
-    }
-
-    private void replace(int j) {
-        if (j != -1) {
-            storage[j] = storage[size];
-            storage[size] = null;
-
-        }
     }
 
     int size() {

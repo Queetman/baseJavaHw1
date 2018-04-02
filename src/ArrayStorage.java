@@ -44,7 +44,6 @@ public class ArrayStorage {
         if (deleteIndex != -1) {
             storage[deleteIndex] = storage[size];
             storage[size] = null;
-
         }
     }
 

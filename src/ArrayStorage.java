@@ -1,7 +1,7 @@
 import java.util.Arrays;
 
 /**
- */
+  */
 public class ArrayStorage {
 
     private final int STORAGE_LENGTH = 10000;

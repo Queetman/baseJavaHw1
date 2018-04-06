@@ -14,8 +14,10 @@ public class ArrayStorage {
     }
 
     void update(Resume r) {
+        int index = getIndex(r.uuid);
 
-        if (hasResume(r)) {
+        if (index != -1) {
+            storage[index] = r;
         } else System.out.println("Резюме нет в базе");
     }
 

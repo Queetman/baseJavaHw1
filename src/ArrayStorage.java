@@ -16,8 +16,7 @@ public class ArrayStorage {
     void update(Resume r) {
 
         if (hasResume(r)) {
-        }
-        else System.out.println("Резюме нет в базе");
+        } else System.out.println("Резюме нет в базе");
     }
 
     void save(Resume r) {

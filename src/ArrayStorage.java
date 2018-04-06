@@ -1,6 +1,20 @@
 import java.util.Arrays;
 
 /**
+ * 1) else System.out.println("...");
+ * в Java принято ВСЕГДА ставить {}
+ * <p>
+ * 2) "Резюме нет в базе" - это не информативное сообщение.
+ * Надо что-то на подобии: Обновление невозможно: отсутствует резюме с uuid =
+ * <p>
+ * 3) у тебя уже есть метод для поиска резюме - getIndex,
+ * а hasResume дублирует финкционал этого метода
+ * <p>
+ * 4) в методе get сразу возвращай результат либо null без создания промежуточной переменной
+ * <p>
+ * 5) в методе delete у тебя есть проверка
+ * if (index != -1)
+ * а в теле if есть метод replace в котором снова есть эта проверка. Зачем два раза делать одну и туже проверку?
  */
 public class ArrayStorage {
 
@@ -18,41 +32,33 @@ public class ArrayStorage {
 
         if (index != -1) {
             storage[index] = r;
-        } else System.out.println("Резюме нет в базе");
+        } else {
+            System.out.println("Обновление невозможно: отсутствует резюме с uuid = " + r.uuid);
+        }
     }
 
     void save(Resume r) {
 
         if (size < STORAGE_LENGTH) {
 
-            if (!hasResume(r)) {
+            if (getIndex(r.uuid) == -1) {
                 storage[size] = r;
                 size++;
             }
-        } else System.out.println("Хранилище переполнено");
-    }
-
-    private boolean hasResume(Resume r) {
-        boolean hasResume = false;
-
-        for (int i = 0; i < size; i++) {
-            if (storage[i].equals(r)) {
-                System.out.println("Резюме уже есть в базе.");
-                hasResume = true;
-            }
+        } else {
+            System.out.println("Хранилище переполнено");
         }
-        return hasResume;
     }
 
     Resume get(String uuid) {
         int index = getIndex(uuid);
-        Resume res = null;
 
         if (index != -1) {
-            res = storage[index];
-        } else System.out.println("Резюме нет в базе");
-
-        return res;
+            return storage[index];
+        } else {
+            System.out.println("Резюме c uuid " + uuid + " нет в базе.");
+        }
+        return null;
     }
 
     void delete(String uuid) {
@@ -61,7 +67,9 @@ public class ArrayStorage {
         if (index != -1) {
             size--;
             replace(index);
-        } else System.out.println("Резюме нет в базе");
+        } else {
+            System.out.println("Резюме c uuid " + uuid + " нет в базе.");
+        }
     }
 
     private int getIndex(String uuid) {
@@ -74,10 +82,8 @@ public class ArrayStorage {
     }
 
     private void replace(int index) {
-        if (index != -1) {
-            storage[index] = storage[size];
-            storage[size] = null;
-        }
+        storage[index] = storage[size];
+        storage[size] = null;
     }
 
     Resume[] getAll() {

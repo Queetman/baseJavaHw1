@@ -22,12 +22,12 @@ public class ArrayStorage {
     private Resume[] storage = new Resume[STORAGE_LENGTH];
     private int size = 0;
 
-    void clear() {
+   public void clear() {
         Arrays.fill(storage, 0, size, null);
         size = 0;
     }
 
-    void update(Resume resume) {
+   public void update(Resume resume) {
         int index = getIndex(resume.uuid);
 
         if (index != -1) {
@@ -37,7 +37,7 @@ public class ArrayStorage {
         }
     }
 
-    void save(Resume resume) {
+   public void save(Resume resume) {
         if (size < STORAGE_LENGTH) {
 
             if (getIndex(resume.uuid) == -1) {
@@ -49,7 +49,7 @@ public class ArrayStorage {
         }
     }
 
-    Resume get(String uuid) {
+   public Resume get(String uuid) {
         int index = getIndex(uuid);
 
         if (index != -1) {
@@ -60,7 +60,7 @@ public class ArrayStorage {
         return null;
     }
 
-    void delete(String uuid) {
+   public void delete(String uuid) {
         int index = getIndex(uuid);
 
         if (index != -1) {

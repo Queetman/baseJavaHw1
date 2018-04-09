@@ -27,22 +27,21 @@ public class ArrayStorage {
         size = 0;
     }
 
-    void update(Resume r) {
-        int index = getIndex(r.uuid);
+    void update(Resume resume) {
+        int index = getIndex(resume.uuid);
 
         if (index != -1) {
-            storage[index] = r;
+            storage[index] = resume;
         } else {
-            System.out.println("Обновление невозможно: отсутствует резюме с uuid = " + r.uuid);
+            System.out.println("Обновление невозможно: отсутствует резюме с uuid = " + resume.uuid);
         }
     }
 
-    void save(Resume r) {
-
+    void save(Resume resume) {
         if (size < STORAGE_LENGTH) {
 
-            if (getIndex(r.uuid) == -1) {
-                storage[size] = r;
+            if (getIndex(resume.uuid) == -1) {
+                storage[size] = resume;
                 size++;
             }
         } else {

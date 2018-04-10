@@ -4,10 +4,6 @@ import java.util.Arrays;
 import java.util.Collections;
 
 public class SortedArrayStorage extends AbstractArrayStorage{
-    @Override
-    public void clear() {
-
-    }
 
     @Override
     public void update(Resume r) {

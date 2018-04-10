@@ -3,6 +3,8 @@ package storage;
 
 import model.Resume;
 
+import java.util.Arrays;
+
 public abstract class AbstractArrayStorage implements Storage {
     protected static final int STORAGE_LIMIT = 10000;
 
@@ -22,6 +24,10 @@ public abstract class AbstractArrayStorage implements Storage {
         return storage[index];
     }
 
+    public void clear() {
+        Arrays.fill(storage, 0, size, null);
+        size = 0;
+    }
 
 
     protected abstract int getIndex(String uuid);

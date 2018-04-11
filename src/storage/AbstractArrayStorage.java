@@ -29,6 +29,5 @@ public abstract class AbstractArrayStorage implements Storage {
         size = 0;
     }
 
-
     protected abstract int getIndex(String uuid);
 }

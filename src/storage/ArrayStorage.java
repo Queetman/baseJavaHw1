@@ -1,10 +1,11 @@
 package storage;
+
 import model.Resume;
+
 import java.util.Arrays;
 
 
 public class ArrayStorage extends AbstractArrayStorage {
-
 
 
     public void update(Resume r) {
@@ -38,10 +39,6 @@ public class ArrayStorage extends AbstractArrayStorage {
         }
     }
 
-    public Resume[] getAll() {
-        return Arrays.copyOfRange(storage, 0, size);
-    }
-
     protected int getIndex(String uuid) {
         for (int i = 0; i < size; i++) {
             if (uuid.equals(storage[i].getUuid())) {
@@ -49,5 +46,9 @@ public class ArrayStorage extends AbstractArrayStorage {
             }
         }
         return -1;
+    }
+
+    public Resume[] getAll() {
+        return Arrays.copyOfRange(storage, 0, size);
     }
 }

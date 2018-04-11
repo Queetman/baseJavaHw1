@@ -5,7 +5,6 @@ import model.Resume;
 import java.util.Arrays;
 import java.util.Comparator;
 
-
 public class SortedArrayStorage extends AbstractArrayStorage {
 
     @Override

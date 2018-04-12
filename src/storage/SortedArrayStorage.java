@@ -9,6 +9,7 @@ public class SortedArrayStorage extends AbstractArrayStorage {
 
     @Override
     public void update(Resume r) {
+
         int index = getIndex(r.getUuid());
 
         if (index == -1) {
@@ -20,7 +21,22 @@ public class SortedArrayStorage extends AbstractArrayStorage {
     }
 
     @Override
+    public void save(Resume r) {
+
+        if (getIndex(r.getUuid()) != -1) {
+            System.out.println("Resume " + r.getUuid() + " already exist");
+        } else if (size >= STORAGE_LIMIT) {
+            System.out.println("Storage overflow");
+        } else {
+            storage[size] = r;
+            size++;
+            sort();
+        }
+    }
+
+    @Override
     public void delete(String uuid) {
+
         int index = getIndex(uuid);
 
         if (index == -1) {
@@ -31,26 +47,14 @@ public class SortedArrayStorage extends AbstractArrayStorage {
             size--;
             sort();
         }
-
-    }
-
-    @Override
-    public Resume[] getAll() {
-        return Arrays.copyOfRange(storage, 0, size);
     }
 
     @Override
     protected int getIndex(String uuid) {
+
         Resume searchKey = new Resume();
         searchKey.setUuid(uuid);
         return Arrays.binarySearch(storage, 0, size, searchKey);
-    }
-
-    @Override
-    public void save(Resume r) {
-        storage[size] = r;
-        size++;
-        sort();
     }
 
     private void sort() {

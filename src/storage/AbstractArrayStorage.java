@@ -1,6 +1,5 @@
 package storage;
 
-
 import model.Resume;
 
 import java.util.Arrays;
@@ -27,6 +26,10 @@ public abstract class AbstractArrayStorage implements Storage {
     public void clear() {
         Arrays.fill(storage, 0, size, null);
         size = 0;
+    }
+
+    public Resume[] getAll() {
+        return Arrays.copyOfRange(storage, 0, size);
     }
 
     protected abstract int getIndex(String uuid);

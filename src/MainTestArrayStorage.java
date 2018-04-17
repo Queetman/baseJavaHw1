@@ -1,5 +1,6 @@
 import model.Resume;
 import storage.AbstractArrayStorage;
+import storage.ArrayStorage;
 import storage.SortedArrayStorage;
 
 /**
@@ -32,16 +33,14 @@ public class MainTestArrayStorage {
 
         System.out.println("Get dummy: " + ARRAY_STORAGE.get("dummy"));
 
-        System.out.println("Before sort:");
         printAll();
-
         r3.setUuid("nouuid3");
         System.out.println("\nUpdating uuid3:");
         ARRAY_STORAGE.update(r3);
         printAll();
 
         System.out.println("Deleting uuid1:");
-        ARRAY_STORAGE.delete(r1.getUuid());
+        ARRAY_STORAGE.delete("uuid1");
         printAll();
 
         ARRAY_STORAGE.clear();

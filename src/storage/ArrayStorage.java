@@ -1,5 +1,7 @@
 package storage;
 
+import model.Resume;
+
 public class ArrayStorage extends AbstractArrayStorage {
 
     @Override
@@ -14,6 +16,13 @@ public class ArrayStorage extends AbstractArrayStorage {
     }
 
     @Override
-    protected void sort() {
+    protected void saveElement(Resume r, int index) {
+        storage[size] = r;
+    }
+
+    @Override
+    protected void deleteElement(int index) {
+        storage[index] = storage[size - 1];
+        storage[size - 1] = null;
     }
 }

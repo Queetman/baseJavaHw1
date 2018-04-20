@@ -22,11 +22,11 @@ public class MainTestArrayStorage {
         r1.setUuid("uuid1");
         r2.setUuid("uuid2");
 
+        ARRAY_STORAGE.save(r1);
+        ARRAY_STORAGE.save(r2);
         ARRAY_STORAGE.save(r5);
         ARRAY_STORAGE.save(r4);
         ARRAY_STORAGE.save(r3);
-        ARRAY_STORAGE.save(r1);
-        ARRAY_STORAGE.save(r2);
 
         System.out.println("Get r1: " + ARRAY_STORAGE.get(r1.getUuid()));
         System.out.println("Size: " + ARRAY_STORAGE.size());
@@ -34,10 +34,15 @@ public class MainTestArrayStorage {
         System.out.println("Get dummy: " + ARRAY_STORAGE.get("dummy"));
 
         printAll();
+
         r3.setUuid("nouuid3");
         System.out.println("\nUpdating uuid3:");
-        ARRAY_STORAGE.update(r3);
+        // ARRAY_STORAGE.update(r3);
         printAll();
+
+//проверка индексов сортируемых элементов после метода update.
+        System.out.println("Getting indexes:");
+        ARRAY_STORAGE.getIndexes();
 
         System.out.println("Deleting uuid1:");
         ARRAY_STORAGE.delete("uuid1");

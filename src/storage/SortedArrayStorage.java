@@ -3,7 +3,6 @@ package storage;
 import model.Resume;
 
 import java.util.Arrays;
-import java.util.Comparator;
 
 public class SortedArrayStorage extends AbstractArrayStorage {
 
@@ -19,7 +18,7 @@ public class SortedArrayStorage extends AbstractArrayStorage {
     protected void saveElement(Resume r, int index) {
 
         int insertIdx = -index - 1;
-        System.arraycopy(storage, insertIdx, storage, insertIdx + 1, size - insertIdx + 1);
+        System.arraycopy(storage, insertIdx, storage, insertIdx + 1, size - insertIdx);
         storage[insertIdx] = r;
 
     }

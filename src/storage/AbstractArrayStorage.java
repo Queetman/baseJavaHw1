@@ -16,6 +16,7 @@ public abstract class AbstractArrayStorage implements Storage {
 
     public Resume get(String uuid) {
         int index = getIndex(uuid);
+
         if (index < 0) {
             System.out.println("Resume with uuid = " + uuid + "does not exist");
             return null;
@@ -23,45 +24,41 @@ public abstract class AbstractArrayStorage implements Storage {
         return storage[index];
     }
 
-    public void update(Resume r) {
-
-        int index = getIndex(r.getUuid());
+    public void update(Resume resume) {
+        int index = getIndex(resume.getUuid());
 
         if (index < 0) {
-            System.out.println("Resume with uuid :" + r.getUuid() + " does not exist");
+            System.out.println("Resume with uuid :" + resume.getUuid() + " does not exist");
         } else {
-            storage[index] = r;
+            storage[index] = resume;
 
         }
     }
 
-    public void save(Resume r) {
-        int index = getIndex(r.getUuid());
+    public void save(Resume resume) {
+        int index = getIndex(resume.getUuid());
 
         if (index >= 0) {
-            System.out.println("Resume " + r.getUuid() + " already exists");
+            System.out.println("Resume " + resume.getUuid() + " already exists");
         } else if (size >= STORAGE_LIMIT) {
             System.out.println("Storage overflow");
         } else {
-
-            saveElement(r, index);
+            saveElement(resume, index);
             size++;
 
         }
     }
 
     public void delete(String uuid) {
-
         int index = getIndex(uuid);
 
         if (index < 0) {
             System.out.println("Resume with uuid :" + uuid + " does not exist");
         } else {
 
-            deleteElement(index);
-
-            storage[size - 1] = null;
             size--;
+            deleteElement(index);
+            storage[size] = null;
 
         }
     }
@@ -80,7 +77,7 @@ public abstract class AbstractArrayStorage implements Storage {
     }
 
     public Resume[] getAll() {
-        return Arrays.copyOfRange(storage, 0, size);
+        return Arrays.copyOf(storage,size);
     }
 
     protected abstract int getIndex(String uuid);

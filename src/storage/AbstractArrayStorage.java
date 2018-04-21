@@ -55,11 +55,9 @@ public abstract class AbstractArrayStorage implements Storage {
         if (index < 0) {
             System.out.println("Resume with uuid :" + uuid + " does not exist");
         } else {
-
             size--;
             deleteElement(index);
             storage[size] = null;
-
         }
     }
 
@@ -77,7 +75,7 @@ public abstract class AbstractArrayStorage implements Storage {
     }
 
     public Resume[] getAll() {
-        return Arrays.copyOf(storage,size);
+        return Arrays.copyOf(storage, size);
     }
 
     protected abstract int getIndex(String uuid);

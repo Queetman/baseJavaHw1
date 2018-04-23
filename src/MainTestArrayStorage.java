@@ -3,9 +3,6 @@ import storage.AbstractArrayStorage;
 import storage.ArrayStorage;
 import storage.SortedArrayStorage;
 
-/**
- * Test for com.urise.webapp.storage.ArrayStorage
- */
 public class MainTestArrayStorage {
     static final AbstractArrayStorage ARRAY_STORAGE = new SortedArrayStorage();
 
@@ -32,17 +29,11 @@ public class MainTestArrayStorage {
         System.out.println("Size: " + ARRAY_STORAGE.size());
 
         System.out.println("Get dummy: " + ARRAY_STORAGE.get("dummy"));
-
         printAll();
 
-        r3.setUuid("nouuid3");
         System.out.println("\nUpdating uuid3:");
-        // ARRAY_STORAGE.update(r3);
+        ARRAY_STORAGE.update(r3);
         printAll();
-
-//проверка индексов сортируемых элементов после метода update.
-        System.out.println("Getting indexes:");
-        ARRAY_STORAGE.getIndexes();
 
         System.out.println("Deleting uuid1:");
         ARRAY_STORAGE.delete("uuid1");

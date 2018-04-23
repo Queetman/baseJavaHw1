@@ -18,7 +18,7 @@ public abstract class AbstractArrayStorage implements Storage {
         int index = getIndex(uuid);
 
         if (index < 0) {
-            System.out.println("Resume with uuid = " + uuid + "does not exist");
+            System.out.println("Resume with uuid " + uuid + " does not exist");
             return null;
         }
         return storage[index];
@@ -64,14 +64,6 @@ public abstract class AbstractArrayStorage implements Storage {
     public void clear() {
         Arrays.fill(storage, 0, size, null);
         size = 0;
-    }
-
-    //тестовый метод
-    public void getIndexes() {
-
-        for (int i = 0; i < size; i++) {
-            System.out.println("Resume with uuid: " + storage[i].getUuid() + " have index " + getIndex(storage[i].getUuid()));
-        }
     }
 
     public Resume[] getAll() {

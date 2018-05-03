@@ -20,8 +20,8 @@ public abstract class AbstractArrayStorage implements Storage {
         int index = getIndex(uuid);
 
         if (index < 0) {
-            System.out.println("Resume with uuid " + uuid + " does not exist");
-            return null;
+            throw new NotExistStorageException(uuid);
+
         }
         return storage[index];
     }

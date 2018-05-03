@@ -9,7 +9,6 @@ public class SortedArrayStorage extends AbstractArrayStorage {
     @Override
     protected int getIndex(String uuid) {
         Resume searchKey = new Resume();
-
         return Arrays.binarySearch(storage, 0, size, searchKey);
     }
 
@@ -23,7 +22,7 @@ public class SortedArrayStorage extends AbstractArrayStorage {
 
     @Override
     protected void deleteElement(int index) {
-        int deleteIndex = size - index;
+        int deleteIndex = size - index-1;
 
         //Проверка на пустоту storage
         if (deleteIndex > 0) {

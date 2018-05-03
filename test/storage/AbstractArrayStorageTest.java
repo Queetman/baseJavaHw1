@@ -11,10 +11,10 @@ import storage.Storage;
 //этот клвсс не тетстируется. тестируются наследники
 public abstract class AbstractArrayStorageTest {
 
-   Storage storage;
+    Storage storage;
 
     public AbstractArrayStorageTest(Storage storage) {
-        this.storage=storage;
+        this.storage = storage;
     }
 
     private static final String UUID_1 = "uuid1";
@@ -22,11 +22,10 @@ public abstract class AbstractArrayStorageTest {
     private static final String UUID_3 = "uuid3";
     private static final String UUID_4 = "uuid4";
 
-    Resume resume1=new Resume(UUID_1);
-    Resume resume2=new Resume(UUID_2);
-    Resume resume3=new Resume(UUID_3);
-    Resume resume4=new Resume(UUID_4);
-
+    Resume resume1 = new Resume(UUID_1);
+    Resume resume2 = new Resume(UUID_2);
+    Resume resume3 = new Resume(UUID_3);
+    Resume resume4 = new Resume(UUID_4);
 
 
     @Before
@@ -73,7 +72,7 @@ public abstract class AbstractArrayStorageTest {
 
     @Test
     public void getExistResume() throws Exception {
-        storage.save(resume1);
+
         Assert.assertEquals(resume1, storage.get("uuid1"));
     }
 
@@ -81,8 +80,6 @@ public abstract class AbstractArrayStorageTest {
     public void getNotExistResume() throws Exception {
         Assert.assertEquals(resume1, storage.get("uuid4"));
     }
-
-
 
     @Test(expected = NotExistStorageException.class)
     public void getNotExist() throws Exception {

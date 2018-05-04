@@ -1,6 +1,5 @@
 import model.Resume;
 import storage.AbstractArrayStorage;
-import storage.ArrayStorage;
 import storage.SortedArrayStorage;
 
 public class MainTestArrayStorage {

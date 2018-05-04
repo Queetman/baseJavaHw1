@@ -85,21 +85,21 @@
    - Не меняйте синтаксис методов `ArrayStorage` и не меняйте класс `Resume`. Нужет только код внутри готовых методов `ArrayStorage`
    - [Массивы](http://study-java.ru/uroki-java/massivy-v-java/)
    - [Java массивы](http://info.javarush.ru/javarush_articles/2015/12/10/Java-%D0%BC%D0%B0%D1%81%D1%81%D0%B8%D0%B2%D1%8B.html)
-- Протестируйте вашу реализацию, запустив `MainTestArrayStorage.main()`: в IDEA слева на полях зеленая стрелка.
-- Протестируйте вашу реализацию интерактивно с помощью `MainArray.main()`.
+- Протестируйте вашу реализацию, запустив `ru.basejava.MainTestArrayStorage.main()`: в IDEA слева на полях зеленая стрелка.
+- Протестируйте вашу реализацию интерактивно с помощью `ru.basejava.MainArray.main()`.
 - Дополнительные материалы по IntelliJ IDEA
   - <a href="https://github.com/JavaOPs/topjava/wiki/IDEA">Idea Wiki</a> (поставить кодировку UTF-8, поменять фонт по умолчанию на DejaVu)
   - <a href="http://learn.javajoy.net/debug-intellij-idea">Отладчик IntelliJ IDEA</a>
   - <a href="http://jeeconf.com/archive/jeeconf-2013/materials/intellij-idea/">Эффективная работа с кодом в IntelliJ IDEA</a>
 
 ### Optional
-- Модифицировать класс `ArrayStorage`: хранить все резюме в начале storage (без дырок null), чтобы не перебирать каждый раз все 10000 элементов.
+- Модифицировать класс `ArrayStorage`: хранить все резюме в начале ru.basejava.ru.exception.storage (без дырок null), чтобы не перебирать каждый раз все 10000 элементов.
 ```
-Хранеие резюме в storage (от 0 до size-1 элементов null нет):
+Хранеие резюме в ru.basejava.ru.exception.storage (от 0 до size-1 элементов null нет):
 
 r1, r2, r3,..., rn, null, null,..., null
 <----  size ----->
-<----  storage.length (10000)---------->
+<----  ru.basejava.ru.exception.storage.length (10000)---------->
 ```
 - Посмотреть на класс `Arrays`. Там есть полезные вещи, которые могут упростить код `ArrayStorage`.
-- Протестируйте реализацию, запустив MainArray.main(): в IDEA слева на полях зеленая стрелка.
+- Протестируйте реализацию, запустив ru.basejava.MainArray.main(): в IDEA слева на полях зеленая стрелка.

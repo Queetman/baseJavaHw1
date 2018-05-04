@@ -1,13 +1,11 @@
 package test.ru.storage;
 
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import ru.exception.NotExistStorageException;
 import ru.model.Resume;
 import ru.storage.Storage;
-
 
 //этот клвсс не тетстируется. тестируются наследники
 public abstract class AbstractArrayStorageTest {

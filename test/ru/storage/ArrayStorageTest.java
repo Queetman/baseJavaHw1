@@ -1,6 +1,6 @@
 package test.ru.storage;
 
-import storage.ArrayStorage;
+import ru.storage.ArrayStorage;
 
 public class ArrayStorageTest extends AbstractArrayStorageTest {
 

@@ -1,11 +1,12 @@
-package test.storage;
+package test.ru.storage;
 
-import exception.NotExistStorageException;
-import model.Resume;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import storage.Storage;
+import ru.exception.NotExistStorageException;
+import ru.model.Resume;
+import ru.storage.Storage;
 
 
 //этот клвсс не тетстируется. тестируются наследники

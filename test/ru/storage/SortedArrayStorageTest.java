@@ -1,4 +1,4 @@
-package test.storage;
+package test.ru.storage;
 
 import storage.SortedArrayStorage;
 

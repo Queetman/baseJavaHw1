@@ -1,6 +1,7 @@
-import model.Resume;
-import storage.ArrayStorage;
-import storage.Storage;
+
+import ru.model.Resume;
+import ru.storage.ArrayStorage;
+import ru.storage.Storage;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

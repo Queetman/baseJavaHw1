@@ -1,6 +1,6 @@
-import model.Resume;
-import storage.AbstractArrayStorage;
-import storage.SortedArrayStorage;
+import ru.model.Resume;
+import ru.storage.AbstractArrayStorage;
+import ru.storage.SortedArrayStorage;
 
 public class MainTestArrayStorage {
     static final AbstractArrayStorage ARRAY_STORAGE = new SortedArrayStorage();

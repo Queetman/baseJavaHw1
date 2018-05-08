@@ -2,6 +2,7 @@ package ru.storage;
 
 import ru.exception.ExistStorageException;
 import ru.exception.NotExistStorageException;
+import ru.exception.StorageException;
 import ru.model.Resume;
 import java.util.Arrays;
 
@@ -20,7 +21,6 @@ public abstract class AbstractArrayStorage implements Storage {
 
         if (index < 0) {
             throw new NotExistStorageException(uuid);
-
         }
         return storage[index];
     }
@@ -41,12 +41,11 @@ public abstract class AbstractArrayStorage implements Storage {
 
         if (index >= 0) {
             throw new ExistStorageException(resume.getUuid());
-        } else if (size >= STORAGE_LIMIT) {
-            System.out.println("Storage overflow");
+        } else if (size == STORAGE_LIMIT) {
+            throw new StorageException("Storage Overflow", resume.getUuid());
         } else {
             saveElement(resume, index);
             size++;
-
         }
     }
 

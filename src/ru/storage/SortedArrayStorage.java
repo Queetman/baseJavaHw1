@@ -1,13 +1,14 @@
 package ru.storage;
 
 import ru.model.Resume;
+
 import java.util.Arrays;
 
 public class SortedArrayStorage extends AbstractArrayStorage {
 
     @Override
     protected int getIndex(String uuid) {
-        Resume searchKey = new Resume();
+        Resume searchKey = new Resume(uuid);
         return Arrays.binarySearch(storage, 0, size, searchKey);
     }
 
@@ -21,7 +22,7 @@ public class SortedArrayStorage extends AbstractArrayStorage {
 
     @Override
     protected void deleteElement(int index) {
-        int deleteIndex = size - index-1;
+        int deleteIndex = size - index - 1;
 
         //Проверка на пустоту ru.storage
         if (deleteIndex > 0) {

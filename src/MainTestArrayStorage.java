@@ -1,9 +1,11 @@
+import ru.exception.StorageException;
 import ru.model.Resume;
 import ru.storage.AbstractArrayStorage;
+import ru.storage.ListStorage;
 import ru.storage.SortedArrayStorage;
 
 public class MainTestArrayStorage {
-    static final AbstractArrayStorage ARRAY_STORAGE = new SortedArrayStorage();
+    static final ListStorage ARRAY_STORAGE = new ListStorage();
 
     public static void main(String[] args) {
         Resume r1 = new Resume();
@@ -21,7 +23,12 @@ public class MainTestArrayStorage {
         System.out.println("Get r1: " + ARRAY_STORAGE.get(r1.getUuid()));
         System.out.println("Size: " + ARRAY_STORAGE.size());
 
+        try{
         System.out.println("Get dummy: " + ARRAY_STORAGE.get("dummy"));
+        }
+        catch (StorageException ex){
+
+        }
         printAll();
 
         System.out.println("\nUpdating uuid3:");
@@ -29,7 +36,7 @@ public class MainTestArrayStorage {
         printAll();
 
         System.out.println("Deleting uuid1:");
-        ARRAY_STORAGE.delete("uuid1");
+        ARRAY_STORAGE.delete(r1.getUuid());
         printAll();
 
         ARRAY_STORAGE.clear();

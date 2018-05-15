@@ -1,7 +1,5 @@
 package ru.storage;
 
-import ru.exception.ExistStorageException;
-import ru.exception.NotExistStorageException;
 import ru.model.Resume;
 
 import java.util.ArrayList;
@@ -18,28 +16,6 @@ public class ListStorage extends AbstractStorage {
     @Override
     public void clear() {
         list.clear();
-    }
-
-    @Override
-    public void update(Resume resume) {
-        int index = getIndex(resume.getUuid());
-
-        if (index < 0) {
-            throw new NotExistStorageException(resume.getUuid());
-        } else {
-            updateResume(index, resume);
-        }
-    }
-
-    @Override
-    public void save(Resume resume) {
-        int index = getIndex(resume.getUuid());
-
-        if (index >= 0) {
-            throw new ExistStorageException(resume.getUuid());
-        } else {
-            list.add(resume);
-        }
     }
 
     @Override
@@ -72,6 +48,11 @@ public class ListStorage extends AbstractStorage {
     @Override
     protected void deleteResume(int index) {
         list.remove(index);
+    }
+
+    @Override
+    protected void saveNewResume(Resume resume, int index) {
+        list.add(resume);
     }
 
 

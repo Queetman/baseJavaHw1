@@ -2,12 +2,13 @@ package ru.storage;
 
 
 import ru.model.Resume;
+
 import java.util.HashMap;
 import java.util.Map;
 
-public class MapStorage extends  AbstractStorage {
+public class MapStorage extends AbstractStorage {
 
-    Map map=new HashMap<String, Resume>();
+    Map map = new HashMap<String, Resume>();
 
     @Override
     public void clear() {
@@ -25,7 +26,7 @@ public class MapStorage extends  AbstractStorage {
 
     @Override
     public Resume get(String uuid) {
-            return null;
+        return null;
     }
 
     @Override
@@ -57,6 +58,10 @@ public class MapStorage extends  AbstractStorage {
 
     @Override
     protected void deleteResume(int index) {
+    }
+
+    @Override
+    protected void saveNewResume(Resume resume, int index) {
     }
 }
 

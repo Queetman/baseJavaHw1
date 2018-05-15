@@ -11,24 +11,12 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
 
     protected static final int STORAGE_LIMIT = 10000;
     protected Resume[] storage = new Resume[STORAGE_LIMIT];
-    protected int size = 0;
+
 
     public int size() {
         return size;
     }
 
-    public void save(Resume resume) {
-        int index = getIndex(resume.getUuid());
-
-        if (index >= 0) {
-            throw new ExistStorageException(resume.getUuid());
-        } else if (size == STORAGE_LIMIT) {
-            throw new StorageException("Storage Overflow", resume.getUuid());
-        } else {
-            saveElement(resume, index);
-            size++;
-        }
-    }
 
     public void clear() {
         Arrays.fill(storage, 0, size, null);
@@ -50,6 +38,12 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         size--;
         deleteElement(index);
         storage[size] = null;
+    }
+
+    @Override
+    protected void saveNewResume(Resume resume, int index) {
+        saveElement(resume, index);
+        size++;
     }
 
     public Resume[] getAll() {

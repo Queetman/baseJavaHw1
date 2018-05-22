@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class ListStorage extends AbstractStorage {
 
-    ArrayList<Resume> list = new ArrayList<>();
+    private ArrayList<Resume> list = new ArrayList<>();
 
     @Override
     public int size() {
@@ -41,8 +41,7 @@ public class ListStorage extends AbstractStorage {
 
     @Override
     protected void updateResume(int index, Resume resume) {
-        list.remove(index);
-        list.add(resume);
+        list.set(index,resume);
     }
 
     @Override

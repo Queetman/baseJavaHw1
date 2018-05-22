@@ -2,14 +2,9 @@ package ru.storage;
 
 import ru.exception.ExistStorageException;
 import ru.exception.NotExistStorageException;
-import ru.exception.StorageException;
 import ru.model.Resume;
 
-import static ru.storage.AbstractArrayStorage.STORAGE_LIMIT;
-
 public abstract class AbstractStorage implements Storage {
-
-    protected int size = 0;
 
     public abstract int size();
 
@@ -42,8 +37,6 @@ public abstract class AbstractStorage implements Storage {
 
         if (index >= 0) {
             throw new ExistStorageException(resume.getUuid());
-        } else if (size == STORAGE_LIMIT) {
-            throw new StorageException("Storage Overflow", resume.getUuid());
         } else {
             saveNewResume(resume, index);
         }

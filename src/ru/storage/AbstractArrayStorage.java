@@ -3,7 +3,7 @@ package ru.storage;
 import ru.exception.StorageException;
 import ru.model.Resume;
 
-import java.util.Arrays;
+import java.util.*;
 
 public abstract class AbstractArrayStorage extends AbstractStorage {
 
@@ -15,25 +15,24 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         return size;
     }
 
-
     public void clear() {
         Arrays.fill(storage, 0, size, null);
         size = 0;
     }
 
     @Override
-    public void saveNewResume(Resume resume, Object index){
-       if (size == STORAGE_LIMIT) {
+    public void saveNewResume(Resume resume, Object index) {
+        if (size == STORAGE_LIMIT) {
             throw new StorageException("Storage Overflow", resume.getUuid());
         } else {
-           saveElement(resume,(Integer) index);
-           size++;
+            saveElement(resume, (Integer) index);
+            size++;
         }
     }
 
     @Override
     protected Resume getResume(Object index) {
-        return storage[(Integer)index];
+        return storage[(Integer) index];
     }
 
     @Override
@@ -48,13 +47,15 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         storage[size] = null;
     }
 
-    public Resume[] getAll() {
-        return Arrays.copyOf(storage, size);
+    public List<Resume> getAllSorted() {
+        ArrayList<Resume> list = new ArrayList<>(Arrays.asList(storage));
+        Collections.sort(list, Comparator.comparing(Resume::getFullName));
+        return list;
     }
 
     @Override
-    protected boolean isExist (Object index){
-        return (Integer)index>=0;
+    protected boolean isExist(Object index) {
+        return (Integer) index >= 0;
     }
 
     protected abstract Integer getSearchKey(String uuid);

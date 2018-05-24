@@ -1,6 +1,5 @@
 package ru.storage;
 
-import ru.exception.ExistStorageException;
 import ru.exception.StorageException;
 import ru.model.Resume;
 
@@ -23,44 +22,42 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
-    public void save(Resume resume) {
-        int index = getIndex(resume.getUuid());
-
-        if (index >= 0) {
-            throw new ExistStorageException(resume.getUuid());
-        } else if (size == STORAGE_LIMIT) {
+    public void saveNewResume(Resume resume, Object index){
+       if (size == STORAGE_LIMIT) {
             throw new StorageException("Storage Overflow", resume.getUuid());
         } else {
-            saveNewResume(resume, index);
+           saveElement(resume,(Integer) index);
+           size++;
         }
     }
 
     @Override
-    protected Resume getResume(int index) {
-        return storage[index];
+    protected Resume getResume(Object index) {
+        return storage[(Integer)index];
     }
 
     @Override
-    protected void updateResume(int index, Resume resume) {
-        storage[index] = resume;
+    protected void updateResume(Object index, Resume resume) {
+        storage[(Integer) index] = resume;
     }
 
     @Override
-    protected void deleteResume(int index) {
+    protected void deleteResume(Object index) {
         size--;
-        deleteElement(index);
+        deleteElement((Integer) index);
         storage[size] = null;
-    }
-
-    @Override
-    protected void saveNewResume(Resume resume, int index) {
-        saveElement(resume, index);
-        size++;
     }
 
     public Resume[] getAll() {
         return Arrays.copyOf(storage, size);
     }
+
+    @Override
+    protected boolean isExist (Object index){
+        return (Integer)index>=0;
+    }
+
+    protected abstract Integer getSearchKey(String uuid);
 
     protected abstract void saveElement(Resume r, int index);
 

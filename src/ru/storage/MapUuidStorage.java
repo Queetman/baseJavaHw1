@@ -26,7 +26,7 @@ public class MapUuidStorage extends AbstractStorage {
     @Override
     public List<Resume> getAllSorted() {
         List<Resume> list = new ArrayList<>(map.values());
-        sortByFullName (list);
+        Collections.sort(list);
 
         return list;
     }
@@ -38,7 +38,7 @@ public class MapUuidStorage extends AbstractStorage {
 
     @Override
     protected void updateResume(Object index, Resume resume) {
-        map.replace((String) index, resume);
+        map.put((String) index, resume);
     }
 
     @Override

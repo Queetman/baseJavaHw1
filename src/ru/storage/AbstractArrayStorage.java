@@ -55,7 +55,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
             list.add(storage[i]);
             i++;
         }
-        Collections.sort(list, Comparator.comparing(Resume::getFullName));
+        sortByFullName(list);
         return list;
     }
 

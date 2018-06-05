@@ -1,6 +1,5 @@
 package ru.storage;
 
-
 import ru.model.Resume;
 
 import java.util.*;
@@ -27,7 +26,7 @@ public class MapUuidStorage extends AbstractStorage {
     @Override
     public List<Resume> getAllSorted() {
         List<Resume> list = new ArrayList<>(map.values());
-       // Collections.sort(list, Comparator.comparing(Resume::getFullName));
+        sortByFullName (list);
 
         return list;
     }
@@ -52,11 +51,12 @@ public class MapUuidStorage extends AbstractStorage {
         map.put((String) index, resume);
     }
 
-    //должне возвращать uuid
+    //должен возвращать uuid
     @Override
     protected Object getSearchKey(String uuid) {
-        return map.containsKey(uuid);
+        return uuid;
     }
+
 }
 
 

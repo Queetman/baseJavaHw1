@@ -8,11 +8,11 @@ public class MainTestArrayStorage {
     static final ListStorage ARRAY_STORAGE = new ListStorage();
 
     public static void main(String[] args) {
-        Resume r1 = new Resume();
-        Resume r2 = new Resume();
-        Resume r3 = new Resume();
-        Resume r4 = new Resume();
-        Resume r5 = new Resume();
+        Resume r1 = new Resume("1");
+        Resume r2 = new Resume("2");
+        Resume r3 = new Resume("3");
+        Resume r4 = new Resume("4");
+        Resume r5 = new Resume("5");
 
         ARRAY_STORAGE.save(r1);
         ARRAY_STORAGE.save(r2);

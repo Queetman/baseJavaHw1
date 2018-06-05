@@ -53,7 +53,6 @@ public abstract class AbstractStorage implements Storage {
         return searchKey;
     }
 
-
     protected abstract boolean isExist(Object searchKey);
 
     public abstract List<Resume> getAllSorted();

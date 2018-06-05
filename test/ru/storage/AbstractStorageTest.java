@@ -7,6 +7,8 @@ import ru.exception.ExistStorageException;
 import ru.exception.NotExistStorageException;
 import ru.model.Resume;
 
+import java.util.*;
+
 //этот клвсс не тестируется. тестируются наследники
 public abstract class AbstractStorageTest {
 
@@ -98,4 +100,14 @@ public abstract class AbstractStorageTest {
         Assert.assertEquals(storage.get(UUID_2), resume2);
         Assert.assertEquals(storage.get(UUID_3), resume3);
     }
+
+    @Test
+    public void getAllSorted() throws Exception {
+        List<Resume> list = storage.getAllSorted();
+
+        Assert.assertEquals(list.get(0).getUuid(), resume1.getUuid());
+        Assert.assertEquals(list.get(1).getUuid(), resume2.getUuid());
+        Assert.assertEquals(list.get(2).getUuid(), resume3.getUuid());
+    }
+
 }

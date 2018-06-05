@@ -25,13 +25,12 @@ public class ListStorage extends AbstractStorage {
 
     @Override
     public List<Resume> getAllSorted() {
-   //     Collections.sort(list, Comparator.comparing(Resume::getFullName));
+        Collections.sort(list, Comparator.comparing(Resume::getFullName));
         return list;
     }
 
     @Override
     protected Integer getSearchKey(String uuid) {
-
         for (int i = 0; i < size(); i++) {
             if (list.get(i).getUuid().equals(uuid)) {
                 return i;

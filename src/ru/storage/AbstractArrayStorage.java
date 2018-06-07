@@ -47,22 +47,20 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         storage[size] = null;
     }
 
-    public List<Resume> getAllSorted() {
-        ArrayList<Resume> list = new ArrayList<>();
-        int i = 0;
+    @Override
+    protected List<Resume> getSortedList() {
+        List<Resume> list = new ArrayList(size);
+        Collections.addAll(list, Arrays.copyOf(storage, size));
 
-        while (storage[i] != null) {
-            list.add(storage[i]);
-            i++;
-        }
-        sortByFullName(list);
         return list;
     }
+
 
     @Override
     protected boolean isExist(Object index) {
         return (Integer) index >= 0;
     }
+
 
     protected abstract Integer getSearchKey(String uuid);
 

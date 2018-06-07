@@ -6,7 +6,7 @@ import java.util.*;
 
 public class ListStorage extends AbstractStorage {
 
-    private List<Resume> list = new ArrayList<>();
+    private ArrayList<Resume> list = new ArrayList<>();
 
     @Override
     public int size() {
@@ -24,8 +24,7 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
-    public List<Resume> getAllSorted() {
-        sortByFullName (list);
+    protected ArrayList<Resume> getSortedList() {
         return list;
     }
 

@@ -48,8 +48,8 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
 
     @Override
     protected List<Resume> getSortableList() {
-        List<Resume> list = new ArrayList(size);
-        Collections.addAll(list, Arrays.copyOf(storage, size));
+        List<Resume> list = new ArrayList(Arrays.asList(storage));
+        list.removeIf(Objects::isNull);
 
         return list;
     }

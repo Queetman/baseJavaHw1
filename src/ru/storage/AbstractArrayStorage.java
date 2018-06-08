@@ -10,7 +10,6 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     protected static final int STORAGE_LIMIT = 10000;
     protected Resume[] storage = new Resume[STORAGE_LIMIT];
     protected int size = 0;
-
     public int size() {
         return size;
     }
@@ -48,19 +47,17 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
-    protected List<Resume> getSortedList() {
+    protected List<Resume> getSortableList() {
         List<Resume> list = new ArrayList(size);
         Collections.addAll(list, Arrays.copyOf(storage, size));
 
         return list;
     }
 
-
     @Override
     protected boolean isExist(Object index) {
         return (Integer) index >= 0;
     }
-
 
     protected abstract Integer getSearchKey(String uuid);
 

@@ -4,7 +4,6 @@ import ru.exception.ExistStorageException;
 import ru.exception.NotExistStorageException;
 import ru.model.Resume;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -57,12 +56,12 @@ public abstract class AbstractStorage implements Storage {
     }
 
     public List<Resume> getAllSorted() {
-        List list = getSortedList();
+        List list = getSortableList();
         Collections.sort(list, Comparator.comparing(Resume::getFullName).thenComparing(Resume::getUuid));
         return list;
     }
 
-    protected abstract List<Resume> getSortedList();
+    protected abstract List<Resume> getSortableList();
 
     protected abstract boolean isExist(Object searchKey);
 

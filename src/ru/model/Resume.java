@@ -1,6 +1,7 @@
 package ru.model;
 
-import java.util.UUID;
+
+import java.util.*;
 
 public class Resume implements Comparable<Resume> {
 
@@ -9,14 +10,22 @@ public class Resume implements Comparable<Resume> {
 
     private String fullName;
 
+    //private ArrayList<Contacts> contactList= new ArrayList(Arrays.asList(Contacts.values()));
+    //  private ArrayList <SectionType> sectionTypeList= new ArrayList(Arrays.asList(SectionType.values()));
+
+    private EnumSet<Contacts> contactSet = EnumSet.allOf(Contacts.class);
+    private EnumSet<SectionType> sectionTypetSet = EnumSet.allOf(SectionType.class);
+
     public Resume(String fullName) {
         this(UUID.randomUUID().toString(), fullName);
     }
 
-    public Resume(String uuid, String fullname) {
-        this.uuid = uuid;
-        this.fullName = fullname;
+    public Resume(String uuid, String fullName) {
 
+        Objects.requireNonNull(uuid, "uuid must be not null");
+        Objects.requireNonNull(fullName, "fullName must be not null");
+        this.uuid = uuid;
+        this.fullName = fullName;
     }
 
     public String getUuid() {

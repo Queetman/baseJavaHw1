@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public abstract class AbstractStorage implements Storage {
+public abstract class AbstractStorage <SearchKey> implements Storage {
 
     public abstract int size();
 
@@ -16,39 +16,39 @@ public abstract class AbstractStorage implements Storage {
 
     @Override
     public Resume get(String uuid) {
-        Object searchKey = getExistedSearchKey(uuid);
+        SearchKey searchKey = getExistedSearchKey(uuid);
 
         return getResume(searchKey);
     }
 
     @Override
     public void update(Resume resume) {
-        Object searchKey = getExistedSearchKey(resume.getUuid());
+        SearchKey searchKey = getExistedSearchKey(resume.getUuid());
         updateResume(searchKey, resume);
     }
 
     @Override
     public void save(Resume resume) {
-        Object searchKey = getNotExistedSearchKey(resume.getUuid());
+        SearchKey searchKey = getNotExistedSearchKey(resume.getUuid());
         saveNewResume(resume, searchKey);
     }
 
     @Override
     public void delete(String uuid) {
-        Object searchKey = getExistedSearchKey(uuid);
+        SearchKey searchKey = getExistedSearchKey(uuid);
         deleteResume(searchKey);
     }
 
-    public Object getExistedSearchKey(String uuid) {
-        Object searchKey = getSearchKey(uuid);
+    public SearchKey getExistedSearchKey(String uuid) {
+        SearchKey searchKey = getSearchKey(uuid);
         if (!isExist(searchKey)) {
             throw new NotExistStorageException(uuid);
         }
         return searchKey;
     }
 
-    public Object getNotExistedSearchKey(String uuid) {
-        Object searchKey = getSearchKey(uuid);
+    public SearchKey getNotExistedSearchKey(String uuid) {
+        SearchKey searchKey = getSearchKey(uuid);
         if (isExist(searchKey)) {
             throw new ExistStorageException(uuid);
         }
@@ -63,15 +63,15 @@ public abstract class AbstractStorage implements Storage {
 
     protected abstract List<Resume> getSortableList();
 
-    protected abstract boolean isExist(Object searchKey);
+    protected abstract boolean isExist(SearchKey searchKey);
 
-    protected abstract Object getSearchKey(String uuid);
+    protected abstract SearchKey getSearchKey(String uuid);
 
-    protected abstract Resume getResume(Object index);
+    protected abstract Resume getResume(SearchKey index);
 
-    protected abstract void updateResume(Object index, Resume resume);
+    protected abstract void updateResume(SearchKey index, Resume resume);
 
-    protected abstract void deleteResume(Object index);
+    protected abstract void deleteResume(SearchKey index);
 
-    protected abstract void saveNewResume(Resume resume, Object index);
+    protected abstract void saveNewResume(Resume resume, SearchKey index);
 }

@@ -5,7 +5,7 @@ import ru.model.Resume;
 
 import java.util.*;
 
-public abstract class AbstractArrayStorage extends AbstractStorage {
+public abstract class AbstractArrayStorage extends AbstractStorage<Integer> {
 
     protected static final int STORAGE_LIMIT = 10000;
     protected Resume[] storage = new Resume[STORAGE_LIMIT];
@@ -20,41 +20,40 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
-    public void saveNewResume(Resume resume, Object index) {
+    public void saveNewResume(Resume resume, Integer index) {
         if (size == STORAGE_LIMIT) {
             throw new StorageException("Storage Overflow", resume.getUuid());
         } else {
-            saveElement(resume, (Integer) index);
+            saveElement(resume, index);
             size++;
         }
     }
 
     @Override
-    protected Resume getResume(Object index) {
-        return storage[(Integer) index];
+    protected Resume getResume(Integer index) {
+        return storage[index];
     }
 
     @Override
-    protected void updateResume(Object index, Resume resume) {
-        storage[(Integer) index] = resume;
+    protected void updateResume(Integer index, Resume resume) {
+        storage[index] = resume;
     }
 
     @Override
-    protected void deleteResume(Object index) {
+    protected void deleteResume(Integer index) {
         size--;
-        deleteElement((Integer) index);
+        deleteElement(index);
         storage[size] = null;
     }
 
     @Override
     protected List<Resume> getSortableList() {
-
-        return new ArrayList(Arrays.asList(Arrays.copyOf(storage, size())));
+        return new ArrayList(Arrays.asList(Arrays.copyOf(storage,size())));
     }
 
     @Override
-    protected boolean isExist(Object index) {
-        return (Integer) index >= 0;
+    protected boolean isExist(Integer index) {
+        return index >= 0;
     }
 
     protected abstract Integer getSearchKey(String uuid);

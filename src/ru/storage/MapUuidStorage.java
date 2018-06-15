@@ -4,7 +4,7 @@ import ru.model.Resume;
 
 import java.util.*;
 
-public class MapUuidStorage extends AbstractStorage {
+public class MapUuidStorage extends AbstractStorage<String> {
 
     private Map<String, Resume> map = new HashMap<>();
 
@@ -19,7 +19,7 @@ public class MapUuidStorage extends AbstractStorage {
     }
 
     @Override
-    protected boolean isExist(Object searchKey) {
+    protected boolean isExist(String searchKey) {
         return map.containsKey(searchKey);
     }
 
@@ -29,28 +29,28 @@ public class MapUuidStorage extends AbstractStorage {
     }
 
     @Override
-    protected Resume getResume(Object index) {
+    protected Resume getResume(String index) {
         return map.get(index);
     }
 
     @Override
-    protected void updateResume(Object index, Resume resume) {
-        map.put((String) index, resume);
+    protected void updateResume(String index, Resume resume) {
+        map.put(index, resume);
     }
 
     @Override
-    protected void deleteResume(Object index) {
+    protected void deleteResume(String index) {
         map.remove(index);
     }
 
     @Override
-    protected void saveNewResume(Resume resume, Object index) {
-        map.put((String) index, resume);
+    protected void saveNewResume(Resume resume, String index) {
+        map.put(index, resume);
     }
 
     //должен возвращать uuid
     @Override
-    protected Object getSearchKey(String uuid) {
+    protected String getSearchKey(String uuid) {
         return uuid;
     }
 

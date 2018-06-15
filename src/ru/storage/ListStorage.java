@@ -4,7 +4,7 @@ import ru.model.Resume;
 
 import java.util.*;
 
-public class ListStorage extends AbstractStorage {
+public class ListStorage extends AbstractStorage<Integer> {
 
     private List<Resume> list = new ArrayList<>();
 
@@ -19,8 +19,8 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
-    protected boolean isExist(Object searchKey) {
-        return (Integer) searchKey != -1;
+    protected boolean isExist(Integer searchKey) {
+        return searchKey != -1;
     }
 
     @Override
@@ -39,22 +39,22 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
-    protected Resume getResume(Object index) {
-        return list.get((Integer) index);
+    protected Resume getResume(Integer index) {
+        return list.get(index);
     }
 
     @Override
-    protected void updateResume(Object index, Resume resume) {
-        list.set((Integer) index, resume);
+    protected void updateResume(Integer index, Resume resume) {
+        list.set(index, resume);
     }
 
     @Override
-    protected void deleteResume(Object index) {
-        list.remove(((Integer) index).intValue());
+    protected void deleteResume(Integer index) {
+        list.remove(index.intValue());
     }
 
     @Override
-    protected void saveNewResume(Resume resume, Object index) {
+    protected void saveNewResume(Resume resume, Integer index) {
         list.add(resume);
     }
 }

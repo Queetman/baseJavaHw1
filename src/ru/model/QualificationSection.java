@@ -2,7 +2,7 @@ package ru.model;
 
 import java.util.Objects;
 
-public class QualificationSection {
+public class QualificationSection extends Section{
 
     private Qualification qualification;
 

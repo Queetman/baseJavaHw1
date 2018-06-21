@@ -2,7 +2,7 @@ package ru.model;
 
 import java.util.Objects;
 
-public class TextSection {
+public class TextSection extends Section {
    private String text;
 
     public TextSection(String text) {

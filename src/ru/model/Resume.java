@@ -10,11 +10,8 @@ public class Resume implements Comparable<Resume> {
 
     private String fullName;
 
-    //private ArrayList<Contacts> contactList= new ArrayList(Arrays.asList(Contacts.values()));
-    //  private ArrayList <SectionType> sectionTypeList= new ArrayList(Arrays.asList(SectionType.values()));
-
-    private EnumSet<Contacts> contactSet = EnumSet.allOf(Contacts.class);
-    private EnumSet<SectionType> sectionTypetSet = EnumSet.allOf(SectionType.class);
+    private Map<Contacts,String> contactMap=new EnumMap(Contacts.class);
+    private Map<SectionType,Section> sections =new EnumMap(SectionType.class);
 
     public Resume(String fullName) {
         this(UUID.randomUUID().toString(), fullName);
@@ -59,5 +56,13 @@ public class Resume implements Comparable<Resume> {
 
     public String getFullName() {
         return fullName;
+    }
+
+    public String getContact (Contacts contact){
+       return contactMap.get(contact);
+    }
+
+    public Section getSectionType (SectionType type){
+        return sections.get(type);
     }
 }

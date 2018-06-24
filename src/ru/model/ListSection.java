@@ -3,12 +3,12 @@ package ru.model;
 import java.util.List;
 import java.util.Objects;
 
-public class ListSection extends Section{
+public class ListSection extends Section {
 
     private List list;
 
     public ListSection(List list) {
-        Objects.requireNonNull(list,"list must be not null");
+        Objects.requireNonNull(list, "list must be not null");
         this.list = list;
     }
 

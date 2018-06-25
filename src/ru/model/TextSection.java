@@ -9,8 +9,8 @@ public class TextSection extends Section {
         Objects.requireNonNull(text,"text must be not null");
         this.text = text;
     }
-
-    public String getText() {
+@Override
+    public String getData() {
         return text;
     }
 

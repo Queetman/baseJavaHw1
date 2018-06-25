@@ -5,14 +5,15 @@ import java.util.Objects;
 
 public class ListSection extends Section {
 
-    private List list;
+    private List<String> list;
 
-    public ListSection(List list) {
+    public ListSection(List<String> list) {
         Objects.requireNonNull(list, "list must be not null");
         this.list = list;
     }
 
-    public List getList() {
+    @Override
+    public List getData() {
         return list;
     }
 

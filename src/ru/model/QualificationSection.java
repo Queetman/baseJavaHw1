@@ -13,7 +13,8 @@ public class QualificationSection extends Section {
         this.qualification = qualification;
     }
 
-    public List<Qualification> getQualification() {
+    @Override
+    public List<Qualification> getData() {
         return qualification;
     }
 

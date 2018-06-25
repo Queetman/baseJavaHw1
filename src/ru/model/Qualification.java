@@ -24,5 +24,23 @@ public class Qualification {
         this.data = data;
     }
 
+    public String getOrganisation() {
+        return organisation;
+    }
 
+    public String getLink() {
+        return link;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public String getData() {
+        return data;
+    }
 }

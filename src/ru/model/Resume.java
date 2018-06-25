@@ -66,10 +66,10 @@ public class Resume implements Comparable<Resume> {
 
         return sections.get(type);
     }
-    public Section getSectionTypeData (SectionType type ){
+    public Object getSectionTypeData (SectionType type ){
 
 
-        return sections.get(type);
+        return sections.get(type).getData();
     }
 
     public void setContact(String contact,Contacts contactName){

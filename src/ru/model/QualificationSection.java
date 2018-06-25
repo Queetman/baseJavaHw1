@@ -1,6 +1,6 @@
 package ru.model;
 
-import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -14,12 +14,15 @@ public class QualificationSection extends Section {
     }
 
     @Override
-    public List<Qualification> getData() {
-        return qualification;
-    }
+    public Object getData() {
 
-    public void setQualification(List<Qualification> qualification) {
-        this.qualification = qualification;
+        List<String> data = new ArrayList();
+
+        for (Qualification q :
+                qualification) {
+            data.add(q.toString());
+        }
+        return data;
     }
 
     @Override

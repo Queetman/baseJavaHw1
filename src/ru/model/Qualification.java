@@ -43,4 +43,15 @@ public class Qualification {
     public String getData() {
         return data;
     }
+
+    @Override
+    public String toString() {
+        return "Qualification{" +
+                "organisation='" + organisation + '\'' +
+                ", link='" + link + '\'' +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", data='" + data + '\'' +
+                '}';
+    }
 }

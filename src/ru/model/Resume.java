@@ -62,12 +62,7 @@ public class Resume implements Comparable<Resume> {
        return contacts.get(contact);
     }
 
-    public Section getSectionType (SectionType type){
-
-        return sections.get(type);
-    }
     public Object getSectionTypeData (SectionType type ){
-
 
         return sections.get(type).getData();
     }

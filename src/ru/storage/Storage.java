@@ -2,11 +2,12 @@ package ru.storage;
 
 import ru.model.Resume;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface Storage {
 
-    void clear();
+    void clear() throws IOException;
 
     void update(Resume resume);
 

@@ -4,6 +4,7 @@ import ru.exception.ExistStorageException;
 import ru.exception.NotExistStorageException;
 import ru.model.Resume;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -15,7 +16,7 @@ public abstract class AbstractStorage<SearchKey> implements Storage {
 
     public abstract int size();
 
-    public abstract void clear();
+    public abstract void clear() throws IOException;
 
     @Override
     public Resume get(String uuid) {

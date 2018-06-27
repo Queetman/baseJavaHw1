@@ -19,7 +19,7 @@ public abstract class AbstractStorage<SearchKey> implements Storage {
     public abstract void clear() throws IOException;
 
     @Override
-    public Resume get(String uuid) {
+    public Resume get(String uuid) throws IOException {
         LOG.info("Get " + uuid);
         SearchKey searchKey = getExistedSearchKey(uuid);
 
@@ -65,20 +65,20 @@ public abstract class AbstractStorage<SearchKey> implements Storage {
         return searchKey;
     }
 
-    public List<Resume> getAllSorted() {
+    public List<Resume> getAllSorted() throws IOException {
         LOG.warning("getAllSort");
         List list = getSortableList();
         Collections.sort(list, Comparator.comparing(Resume::getFullName).thenComparing(Resume::getUuid));
         return list;
     }
 
-    protected abstract List<Resume> getSortableList();
+    protected abstract List<Resume> getSortableList() throws IOException;
 
     protected abstract boolean isExist(SearchKey searchKey);
 
     protected abstract SearchKey getSearchKey(String uuid);
 
-    protected abstract Resume getResume(SearchKey index);
+    protected abstract Resume getResume(SearchKey index) throws IOException;
 
     protected abstract void updateResume(SearchKey index, Resume resume);
 

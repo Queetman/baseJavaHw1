@@ -13,11 +13,11 @@ public interface Storage {
 
     void save(Resume resume);
 
-    Resume get(String uuid);
+    Resume get(String uuid) throws IOException;
 
     void delete(String uuid);
 
-    List<Resume> getAllSorted();
+    List<Resume> getAllSorted() throws IOException;
 
     int size();
 }

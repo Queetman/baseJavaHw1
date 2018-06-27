@@ -5,8 +5,9 @@ import org.junit.Before;
 import org.junit.Test;
 import ru.exception.ExistStorageException;
 import ru.exception.NotExistStorageException;
-import ru.model.Resume;
+import ru.model.*;
 
+import java.time.LocalDate;
 import java.util.*;
 
 //этот клвсс не тестируется. тестируются наследники
@@ -28,12 +29,75 @@ public abstract class AbstractStorageTest {
     private static final Resume resume3 = new Resume(UUID_3,"fullName3");
     private static final Resume resume4 = new Resume(UUID_4,"fullName4");
 
+    private static Resume res = new Resume("Unknown");
+
     @Before
     public void setUp() throws Exception {
         storage.clear();
         storage.save(resume2);
         storage.save(resume3);
         storage.save(resume1);
+
+        //Contact
+        res.setContact("Мобилка", Contacts.TELEPHONE);
+        res.setContact("Скуре", Contacts.SKYPE);
+        res.setContact("Мыло", Contacts.MAIL);
+        res.setContact("Линкин", Contacts.LINKEDIN);
+        res.setContact("Хаб", Contacts.GITHUB);
+        res.setContact("Стак", Contacts.STATCKOVERFLOW);
+        res.setContact("Домашняя страница ", Contacts.HOMEPAGE);
+
+        //TextSection Personal
+        res.setSectionType(new TextSection("Паровозик, который смог"), SectionType.PERSONAL);
+
+        //TextSection Objective
+        res.setSectionType(new TextSection("Позитивная, смог же)"), SectionType.OBJECTIVE);
+
+        //ListSection achievements
+        List<String> achievements = new ArrayList<>();
+
+        achievements.add("Leeroy");
+        achievements.add("Jenkins");
+
+        res.setSectionType(new ListSection(achievements), SectionType.ACHIEVEMENT);
+
+        //ListSection qualification
+        List<String> qualification = new ArrayList<>();
+
+        qualification.add("digging manager");
+        qualification.add("not digging top  manager");
+
+        res.setSectionType(new ListSection(qualification), SectionType.QUALIFICATIONS);
+
+        //OrganisationSection experience
+        Organisation organisationOne = new Organisation("Рога и копыта", "РогаИКопыта.РФ",
+                LocalDate.now(), LocalDate.now(), "Фирма-однодневка");
+        Organisation organisationTwo = new Organisation("ШахматныйТурнир", "Васюки.РФ",
+                LocalDate.now(), LocalDate.now(), "турнир 1927 года. 1 место.");
+
+        List<Organisation> qualifications = new ArrayList<>();
+
+        qualifications.add(organisationOne);
+        qualifications.add(organisationTwo);
+
+        res.setSectionType(new OrganisationSection(qualifications), SectionType.EXPERIENCE);
+
+        //Organisation section Education
+        Organisation school = new Organisation("Сельмаш №1", "нет",
+                LocalDate.now(), LocalDate.now(), "Уверенный хорошист по выгулу коров, твердая пятерка по рыбалке ");
+        Organisation univercity = new Organisation("Тракторный завод имени Васюткина", "SpBsmdb.РФ",
+                LocalDate.now(), LocalDate.now(), "Создание трактора- это тонки и очень кропотливый труд!");
+      univercity.addNewWork(LocalDate.now(),LocalDate.now(),"Аспирантура. Тема диссертации: исслеование использования " +
+              "турбированных тракторов на качестов засева полей");
+
+
+        List<Organisation> education = new ArrayList<>();
+
+        education.add(school);
+        education.add(univercity);
+
+        res.setSectionType(new OrganisationSection(education), SectionType.EDUCATION);
+
     }
 
     @Test

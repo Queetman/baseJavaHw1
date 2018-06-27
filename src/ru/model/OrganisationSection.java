@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class QualificationSection extends Section {
+public class OrganisationSection extends Section {
 
-    private List<Qualification> qualification;
+    private List<Organisation> qualification;
 
-    public QualificationSection(List<Qualification> qualification) {
+    public OrganisationSection(List<Organisation> qualification) {
         Objects.requireNonNull(qualification, "qualification must be not null");
         this.qualification = qualification;
     }
@@ -18,7 +18,7 @@ public class QualificationSection extends Section {
 
         List<String> data = new ArrayList();
 
-        for (Qualification q :
+        for (Organisation q :
                 qualification) {
             data.add(q.toString());
         }
@@ -29,13 +29,12 @@ public class QualificationSection extends Section {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        QualificationSection that = (QualificationSection) o;
+        OrganisationSection that = (OrganisationSection) o;
         return Objects.equals(qualification, that.qualification);
     }
 
     @Override
     public int hashCode() {
-
         return Objects.hash(qualification);
     }
 }

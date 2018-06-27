@@ -3,7 +3,7 @@ package ru.model;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Qualification {
+public class Organisation {
 
     private String organisation;
     private String link;
@@ -11,7 +11,7 @@ public class Qualification {
     private LocalDate endDate;
     private String data;
 
-    public Qualification(String organisation, String link, LocalDate startDate, LocalDate endDate, String data) {
+    public Organisation(String organisation, String link, LocalDate startDate, LocalDate endDate, String data) {
         Objects.requireNonNull(organisation, "organisation must be not null");
         Objects.requireNonNull(startDate, "startDate must be not null");
         Objects.requireNonNull(endDate, "endDate must be not null");
@@ -46,7 +46,7 @@ public class Qualification {
 
     @Override
     public String toString() {
-        return "Qualification{" +
+        return "Organisation{" +
                 "organisation='" + organisation + '\'' +
                 ", link='" + link + '\'' +
                 ", startDate=" + startDate +

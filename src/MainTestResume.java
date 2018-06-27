@@ -1,13 +1,14 @@
 import ru.model.*;
 
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainTestResume {
+
+    private static Resume res = new Resume("Unknown");
+
     public static void main(String[] args) {
-        Resume res = new Resume("Unknown");
 
         //Contact test
         res.setContact("Мобилка", Contacts.TELEPHONE);
@@ -25,16 +26,19 @@ public class MainTestResume {
         System.out.println(res.getContact(Contacts.GITHUB));
         System.out.println(res.getContact(Contacts.STATCKOVERFLOW));
         System.out.println(res.getContact(Contacts.HOMEPAGE));
-        System.out.println(res.getContact(Contacts.GITHUB));
-        System.out.println();
+        System.out.println(res.getContact(Contacts.GITHUB) + "\n");
 
-        //TextSection test
+        //TextSection Personal
         res.setSectionType(new TextSection("Паровозик, который смог"), SectionType.PERSONAL);
 
-        System.out.println(res.getSectionTypeData(SectionType.PERSONAL));
-        System.out.println();
+        print(SectionType.PERSONAL);
 
-        //ListSection test
+        //TextSection Objective
+        res.setSectionType(new TextSection("Позитивная, смог же)"), SectionType.OBJECTIVE);
+
+        print(SectionType.OBJECTIVE);
+
+        //ListSection achievements
         List<String> achievements = new ArrayList<>();
 
         achievements.add("Leeroy");
@@ -42,24 +46,52 @@ public class MainTestResume {
 
         res.setSectionType(new ListSection(achievements), SectionType.ACHIEVEMENT);
 
-        System.out.println(res.getSectionTypeData(SectionType.ACHIEVEMENT));
+        print(SectionType.ACHIEVEMENT);
 
-        //QualificationSection test
+        //ListSection qualification
 
-        Qualification qualificationOne = new Qualification("Рога и копыта", "РогаИКопыта.РФ",
+        List<String> qualification = new ArrayList<>();
+
+        qualification.add("digging manager");
+        qualification.add("not digging top  manager");
+
+        res.setSectionType(new ListSection(qualification), SectionType.QUALIFICATIONS);
+
+        print(SectionType.QUALIFICATIONS);
+
+        //OrganisationSection experience
+        Organisation organisationOne = new Organisation("Рога и копыта", "РогаИКопыта.РФ",
                 LocalDate.now(), LocalDate.now(), "Фирма-однодневка");
-        Qualification qualificationTwo = new Qualification("ШахматныйТурнир", "Васюки.РФ",
-                LocalDate.now(), LocalDate.now(), "турнир 1927 года");
+        Organisation organisationTwo = new Organisation("ШахматныйТурнир", "Васюки.РФ",
+                LocalDate.now(), LocalDate.now(), "турнир 1927 года. 1 место.");
 
-        List<Qualification> qualifications = new ArrayList<>();
+        List<Organisation> qualifications = new ArrayList<>();
 
-        qualifications.add(qualificationOne);
-        qualifications.add(qualificationTwo);
+        qualifications.add(organisationOne);
+        qualifications.add(organisationTwo);
 
-        res.setSectionType(new QualificationSection(qualifications), SectionType.QUALIFICATIONS);
+        res.setSectionType(new OrganisationSection(qualifications), SectionType.EXPERIENCE);
 
-        System.out.println(res.getSectionTypeData(SectionType.QUALIFICATIONS));
+        System.out.println(res.getSectionTypeData(SectionType.EXPERIENCE));
+
+        //Organisation section Education
+
+        Organisation school = new Organisation("Сельмаш №1", "нет",
+                LocalDate.now(), LocalDate.now(), "Уверенный хорошист по выгулу коров, твердая пятерка по рыбалке ");
+        Organisation univercity = new Organisation("Тракторный завод имени Васюткина", "SpBsmdb.РФ",
+                LocalDate.now(), LocalDate.now(), "Создание трактора- это тонки и очень кропотливый труд!");
+
+        List<Organisation> education = new ArrayList<>();
+
+        education.add(school);
+        education.add(univercity);
+
+        res.setSectionType(new OrganisationSection(education), SectionType.EDUCATION);
+
+        System.out.println(res.getSectionTypeData(SectionType.EDUCATION));
     }
 
-
+    private static void print(SectionType type) {
+        System.out.println(type.getTitle() + ": " + res.getSectionTypeData(type) + "\n");
+    }
 }

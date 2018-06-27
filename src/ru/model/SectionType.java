@@ -1,12 +1,12 @@
 package ru.model;
 
 public enum SectionType {
-    PERSONAL("Личные качества"),
-    OBJECTIVE("Позиция"),
-    ACHIEVEMENT("Достижения"),
-    QUALIFICATIONS("Квалификация"),
-    EXPERIENCE("Опыт работы"),
-    EDUCATION("Образование");
+    PERSONAL("Личные качества"),//textSection
+    OBJECTIVE("Позиция"),//textSection
+    ACHIEVEMENT("Достижения"),//listSection
+    QUALIFICATIONS("Квалификация"),//listSection
+    EXPERIENCE("Опыт работы"),//OrganisationSection
+    EDUCATION("Образование");//OrganisationSection
 
     private String title;
 

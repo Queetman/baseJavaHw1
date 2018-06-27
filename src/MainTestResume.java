@@ -49,7 +49,6 @@ public class MainTestResume {
         print(SectionType.ACHIEVEMENT);
 
         //ListSection qualification
-
         List<String> qualification = new ArrayList<>();
 
         qualification.add("digging manager");
@@ -80,7 +79,8 @@ public class MainTestResume {
                 LocalDate.now(), LocalDate.now(), "Уверенный хорошист по выгулу коров, твердая пятерка по рыбалке ");
         Organisation univercity = new Organisation("Тракторный завод имени Васюткина", "SpBsmdb.РФ",
                 LocalDate.now(), LocalDate.now(), "Создание трактора- это тонки и очень кропотливый труд!");
-
+        univercity.addNewWork(LocalDate.now(),LocalDate.now(),"Аспирантура. Тема диссертации: исследование использования " +
+                "турбированных тракторов на качестов засева полей");
         List<Organisation> education = new ArrayList<>();
 
         education.add(school);

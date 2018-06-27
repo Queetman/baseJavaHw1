@@ -1,15 +1,17 @@
 package ru.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Organisation {
 
     private String organisation;
     private String link;
-    private LocalDate startDate;
-    private LocalDate endDate;
-    private String data;
+    private List <LocalDate> startDateList=new ArrayList<>();
+    private List<LocalDate> endDateList=new ArrayList<>();;
+    private List<String> dataList=new ArrayList<>();;
 
     public Organisation(String organisation, String link, LocalDate startDate, LocalDate endDate, String data) {
         Objects.requireNonNull(organisation, "organisation must be not null");
@@ -19,9 +21,9 @@ public class Organisation {
 
         this.organisation = organisation;
         this.link = link;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.data = data;
+        startDateList.add(startDate);
+        endDateList.add(endDate);
+        dataList.add(data);
     }
 
     public String getOrganisation() {
@@ -32,16 +34,16 @@ public class Organisation {
         return link;
     }
 
-    public LocalDate getStartDate() {
-        return startDate;
+    public List<LocalDate> getStartDateList() {
+        return startDateList;
     }
 
-    public LocalDate getEndDate() {
-        return endDate;
+    public List<LocalDate> getEndDateList() {
+        return endDateList;
     }
 
-    public String getData() {
-        return data;
+    public List<String> getDataList() {
+        return dataList;
     }
 
     @Override
@@ -49,9 +51,15 @@ public class Organisation {
         return "Organisation{" +
                 "organisation='" + organisation + '\'' +
                 ", link='" + link + '\'' +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
-                ", data='" + data + '\'' +
+                ", startDateList=" + startDateList +
+                ", endDateList=" + endDateList +
+                ", dataList=" + dataList +
                 '}';
+    }
+
+    public void addNewWork(LocalDate newStartDate, LocalDate newEndDate, String data) {
+        startDateList.add(newEndDate);
+        endDateList.add(newEndDate);
+        dataList.add(data);
     }
 }

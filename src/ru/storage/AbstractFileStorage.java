@@ -27,6 +27,7 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
 
     @Override
     public int size() {
+        number = 0;//if method will be used 2 or more times
         return directorySize(directory);
     }
 
@@ -37,23 +38,9 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
 
     @Override
     protected List<Resume> getSortableList() throws IOException {
-        List<Resume> resumes=new ArrayList<>();
+        resumes.clear();//if method will be used 2 or more times
 
-        if (directory.isDirectory()) {
-            File[] files = directory.listFiles();
-            for (File file : files) {
-                if (file.isDirectory())
-                    directorySize(directory);
-            }
-            for (File file : files) {
-
-                if (file.isFile()) {   //проверяем, файл ли это
-
-                    resumes.add(doRead(file));
-                }
-            }
-        }
-         return resumes;
+        return getFileNames(directory);
     }
 
     @Override
@@ -72,10 +59,7 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
 
         if (file.isDirectory()) {
             throw new IllegalArgumentException(directory.getAbsolutePath() + " is not directory");
-        }
-        else return doRead(file);
-
-
+        } else return doRead(file);
     }
 
     @Override
@@ -102,27 +86,54 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
         }
     }
 
-    protected abstract void doWrite(Resume resume, File file) throws IOException;
+    private int number = 0;
 
-    protected abstract Resume doRead(File file) throws IOException;
+    private int directorySize(File directory) {
 
-    private int directorySize(File directory){
-        int n=0;
+        if (directory.isDirectory()) {
+            File[] files = directory.listFiles();
+            for (File file : files) {
+                if (file.isDirectory())
+                    directorySize(directory);
+            }
+            for (File file : files) {
+
+                if (file.isFile()) {   //проверяем, файл ли это
+                    number++;
+                }
+            }
+        }
+        return number;
+    }
+
+
+    private List<Resume> resumes = new ArrayList<>();
+
+    private List<Resume> getFileNames(File directory) throws IOException {
+        {
+
+
             if (directory.isDirectory()) {
                 File[] files = directory.listFiles();
                 for (File file : files) {
                     if (file.isDirectory())
-                       directorySize(directory);
+                        getFileNames(directory);
                 }
                 for (File file : files) {
 
                     if (file.isFile()) {   //проверяем, файл ли это
-                        n++;
+
+                        resumes.add(doRead(file));
                     }
                 }
             }
-            return  n;
+            return resumes;
         }
+    }
+
+    protected abstract void doWrite(Resume resume, File file) throws IOException;
+
+    protected abstract Resume doRead(File file) throws IOException;
 
 }
 

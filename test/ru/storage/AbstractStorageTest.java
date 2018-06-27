@@ -90,7 +90,6 @@ public abstract class AbstractStorageTest {
       univercity.addNewWork(LocalDate.now(),LocalDate.now(),"Аспирантура. Тема диссертации: исслеование использования " +
               "турбированных тракторов на качестов засева полей");
 
-
         List<Organisation> education = new ArrayList<>();
 
         education.add(school);

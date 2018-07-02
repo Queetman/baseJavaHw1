@@ -111,8 +111,6 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
 
     private List<Resume> getFileNames(File directory) throws IOException {
         {
-
-
             if (directory.isDirectory()) {
                 File[] files = directory.listFiles();
                 for (File file : files) {

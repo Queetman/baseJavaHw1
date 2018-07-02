@@ -1,4 +1,3 @@
-import ru.model.Resume;
 
 import java.io.File;
 import java.io.IOException;

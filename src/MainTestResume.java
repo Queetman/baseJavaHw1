@@ -59,10 +59,12 @@ public class MainTestResume {
         print(SectionType.QUALIFICATIONS);
 
         //OrganisationSection experience
-        Organisation organisationOne = new Organisation("Рога и копыта", "РогаИКопыта.РФ",
-                LocalDate.now(), LocalDate.now(), "Фирма-однодневка");
-        Organisation organisationTwo = new Organisation("ШахматныйТурнир", "Васюки.РФ",
-                LocalDate.now(), LocalDate.now(), "турнир 1927 года. 1 место.");
+
+        OrganisationPosition topManager=new OrganisationPosition(LocalDate.now(), LocalDate.now(), "Большой опыт командованиия парадами");
+        OrganisationPosition megaManager=new OrganisationPosition(LocalDate.now(), LocalDate.now(), "Великиий шахматист и комбинатор");
+
+        Organisation organisationOne = new Organisation("Рога и копыта", "РогаИКопыта.РФ",topManager);
+        Organisation organisationTwo = new Organisation("ШахматныйТурнир", "Васюки.РФ", megaManager);
 
         List<Organisation> qualifications = new ArrayList<>();
 
@@ -75,16 +77,22 @@ public class MainTestResume {
 
         //Organisation section Education
 
-        Organisation school = new Organisation("Сельмаш №1", "нет",
-                LocalDate.now(), LocalDate.now(), "Уверенный хорошист по выгулу коров, твердая пятерка по рыбалке ");
-        Organisation univercity = new Organisation("Тракторный завод имени Васюткина", "SpBsmdb.РФ",
-                LocalDate.now(), LocalDate.now(), "Создание трактора- это тонки и очень кропотливый труд!");
-        univercity.addNewWork(LocalDate.now(),LocalDate.now(),"Аспирантура. Тема диссертации: исследование использования " +
-                "турбированных тракторов на качестов засева полей");
+        OrganisationPosition schoolChild = new OrganisationPosition(LocalDate.now(), LocalDate.now(),
+                "Уверенный хорошист по выгулу коров, твердая пятерка по рыбалке ");
+        OrganisationPosition student = new OrganisationPosition(LocalDate.now(), LocalDate.now(), "Магистр. Тема: Исследование влияния магнитного" +
+                "поля на форму мечей пр перековке их на орала в печах с индуктивным нагревом.");
+        OrganisationPosition postGraduateStudent = new OrganisationPosition(LocalDate.now(), LocalDate.now(),
+                 "Аспирантура. Тема диссертации: исследование использования турбированных тракторов на качество засева полей");
+
+        Organisation school = new Organisation("Школа №1", "нет", schoolChild);
+        Organisation university = new Organisation("Тракторный завод имени Васюткина", "SpBsmdb.РФ", student);
+
+        university.addOrganisationPosition(postGraduateStudent);
+
         List<Organisation> education = new ArrayList<>();
 
         education.add(school);
-        education.add(univercity);
+        education.add(university);
 
         res.setSectionType(new OrganisationSection(education), SectionType.EDUCATION);
 

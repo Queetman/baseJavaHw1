@@ -34,7 +34,7 @@ public abstract class AbstractStorage<SearchKey> implements Storage {
     }
 
     @Override
-    public void save(Resume resume) {
+    public void save(Resume resume) throws IOException {
         LOG.info("Save " + resume);
         SearchKey searchKey = getNotExistedSearchKey(resume.getUuid());
         saveNewResume(resume, searchKey);
@@ -84,5 +84,5 @@ public abstract class AbstractStorage<SearchKey> implements Storage {
 
     protected abstract void deleteResume(SearchKey index);
 
-    protected abstract void saveNewResume(Resume resume, SearchKey index);
+    protected abstract void saveNewResume(Resume resume, SearchKey index) throws IOException;
 }

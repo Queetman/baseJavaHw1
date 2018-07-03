@@ -11,7 +11,7 @@ public interface Storage {
 
     void update(Resume resume);
 
-    void save(Resume resume);
+    void save(Resume resume) throws IOException;
 
     Resume get(String uuid) throws IOException;
 

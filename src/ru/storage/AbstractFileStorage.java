@@ -5,10 +5,7 @@ import ru.model.Resume;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public abstract class AbstractFileStorage extends AbstractStorage<File> {
     //имя файлов uuid
@@ -27,20 +24,34 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
 
     @Override
     public int size() {
-        number = 0;//if method will be used 2 or more times
-        return directorySize(directory);
+        return (int) directory.length();
     }
 
     @Override
-    public void clear() throws IOException {
-        Files.deleteIfExists(directory.toPath());
+    public void clear() {
+        if (directory.exists()) {
+            for (File file : directory.listFiles()) {
+                file.delete();
+            }
+
+        }
     }
 
     @Override
-    protected List<Resume> getSortableList() throws IOException {
-        resumes.clear();//if method will be used 2 or more times
+    protected List<Resume> getSortableList() {
 
-        return getFileNames(directory);
+        Resume[] resumes;
+
+        File[] files = directory.listFiles();
+        resumes = new Resume[files.length];
+        for (int i = 0; i < files.length; i++) {
+            try {
+                resumes[i] = doRead(files[i]);
+            } catch (IOException e) {
+                throw new StorageException("IO error", "cant read file " + files[i].getName(), e);
+            }
+        }
+        return Arrays.asList(resumes);
     }
 
     @Override
@@ -55,11 +66,14 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
 
     //будет абстрактный метод doRead который читает реюме из  файла
     @Override
-    protected Resume getResume(File file) throws IOException {
-
-        if (file.isDirectory()) {
-            throw new IllegalArgumentException(directory.getAbsolutePath() + " is not directory");
-        } else return doRead(file);
+    protected Resume getResume(File file) {
+        Resume resume;
+        try {
+            resume = doRead(file);
+        } catch (IOException e) {
+            throw new StorageException("IO error", file.getName(), e);
+        }
+        return resume;
     }
 
     @Override
@@ -73,60 +87,20 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
 
     @Override
     protected void deleteResume(File file) {
-        file.delete();
+
+        if (file.delete()) {
+            System.out.println(file.getName() + " deleted");
+        } else throw new IllegalArgumentException(file.getName() + " doesn't deleted");
     }
 
     @Override
     protected void saveNewResume(Resume resume, File file) {
         try {
             file.createNewFile();
-            doWrite(resume, file);
         } catch (IOException e) {
             throw new StorageException("IO error", file.getName(), e);
         }
-    }
-
-    private int number = 0;
-
-    private int directorySize(File directory) {
-
-        if (directory.isDirectory()) {
-            File[] files = directory.listFiles();
-            for (File file : files) {
-                if (file.isDirectory())
-                    directorySize(directory);
-            }
-            for (File file : files) {
-
-                if (file.isFile()) {   //проверяем, файл ли это
-                    number++;
-                }
-            }
-        }
-        return number;
-    }
-
-
-    private List<Resume> resumes = new ArrayList<>();
-
-    private List<Resume> getFileNames(File directory) throws IOException {
-        {
-            if (directory.isDirectory()) {
-                File[] files = directory.listFiles();
-                for (File file : files) {
-                    if (file.isDirectory())
-                        getFileNames(directory);
-                }
-                for (File file : files) {
-
-                    if (file.isFile()) {   //проверяем, файл ли это
-
-                        resumes.add(doRead(file));
-                    }
-                }
-            }
-            return resumes;
-        }
+        updateResume(file, resume);
     }
 
     protected abstract void doWrite(Resume resume, File file) throws IOException;

@@ -10,7 +10,7 @@ import ru.model.*;
 import java.time.LocalDate;
 import java.util.*;
 
-//этот клвсс не тестируется. тестируются наследники
+//этот класс не тестируется. тестируются наследники
 public abstract class AbstractStorageTest {
 
     Storage storage;
@@ -24,12 +24,10 @@ public abstract class AbstractStorageTest {
     private static final String UUID_3 = "uuid3";
     private static final String UUID_4 = "uuid4";
 
-    private static final Resume resume1 = new Resume(UUID_1,"fullName1");
-    private static final Resume resume2 = new Resume(UUID_2,"fullName2");
-    private static final Resume resume3 = new Resume(UUID_3,"fullName3");
-    private static final Resume resume4 = new Resume(UUID_4,"fullName4");
-
-    private static Resume res = new Resume("Unknown");
+    private static final Resume resume1 = new Resume(UUID_1, "fullName1");
+    private static final Resume resume2 = new Resume(UUID_2, "fullName2");
+    private static final Resume resume3 = new Resume(UUID_3, "fullName3");
+    private static final Resume resume4 = new Resume(UUID_4, "fullName4");
 
     @Before
     public void setUp() throws Exception {
@@ -38,65 +36,81 @@ public abstract class AbstractStorageTest {
         storage.save(resume3);
         storage.save(resume1);
 
+        Resume[] resumeArray = {resume1, resume2, resume3, resume4};
+
+
         //Contact
-        res.setContact("Мобилка", Contacts.TELEPHONE);
-        res.setContact("Скуре", Contacts.SKYPE);
-        res.setContact("Мыло", Contacts.MAIL);
-        res.setContact("Линкин", Contacts.LINKEDIN);
-        res.setContact("Хаб", Contacts.GITHUB);
-        res.setContact("Стак", Contacts.STATCKOVERFLOW);
-        res.setContact("Домашняя страница ", Contacts.HOMEPAGE);
+        for (int i = 0; i < resumeArray.length; i++) {
 
-        //TextSection Personal
-        res.setSectionType(new TextSection("Паровозик, который смог"), SectionType.PERSONAL);
+            resumeArray[i].setContact("Мобилка " + i, Contacts.TELEPHONE);
+            resumeArray[i].setContact("Скуре " + i, Contacts.SKYPE);
+            resumeArray[i].setContact("Мыло " + i, Contacts.MAIL);
+            resumeArray[i].setContact("Линкин " + i, Contacts.LINKEDIN);
+            resumeArray[i].setContact("Хаб " + i, Contacts.GITHUB);
+            resumeArray[i].setContact("Стак " + i, Contacts.STATCKOVERFLOW);
+            resumeArray[i].setContact("Домашняя страница " + i, Contacts.HOMEPAGE);
 
-        //TextSection Objective
-        res.setSectionType(new TextSection("Позитивная, смог же)"), SectionType.OBJECTIVE);
+            //TextSection Personal
+            resumeArray[i].setSectionType(new TextSection("Паровозик" + i), SectionType.PERSONAL);
 
-        //ListSection achievements
-        List<String> achievements = new ArrayList<>();
+            //TextSection Objective
+            resumeArray[i].setSectionType(new TextSection("Позитивная" + i), SectionType.OBJECTIVE);
 
-        achievements.add("Leeroy");
-        achievements.add("Jenkins");
+            //ListSection achievements
+            List<String> achievements = new ArrayList<>();
 
-        res.setSectionType(new ListSection(achievements), SectionType.ACHIEVEMENT);
+            achievements.add("Leeroy" + i);
+            achievements.add("Jenkins" + i);
 
-        //ListSection qualification
-        List<String> qualification = new ArrayList<>();
+            resumeArray[i].setSectionType(new ListSection(achievements), SectionType.ACHIEVEMENT);
 
-        qualification.add("digging manager");
-        qualification.add("not digging top  manager");
+            //ListSection qualification
+            List<String> qualification = new ArrayList<>();
 
-        res.setSectionType(new ListSection(qualification), SectionType.QUALIFICATIONS);
+            qualification.add("digging manager" + i);
+            qualification.add("not digging top  manager" + i);
 
-        //OrganisationSection experience
-        Organisation organisationOne = new Organisation("Рога и копыта", "РогаИКопыта.РФ",
-                LocalDate.now(), LocalDate.now(), "Фирма-однодневка");
-        Organisation organisationTwo = new Organisation("ШахматныйТурнир", "Васюки.РФ",
-                LocalDate.now(), LocalDate.now(), "турнир 1927 года. 1 место.");
+            resumeArray[i].setSectionType(new ListSection(qualification), SectionType.QUALIFICATIONS);
 
-        List<Organisation> qualifications = new ArrayList<>();
+            //OrganisationSection experience
 
-        qualifications.add(organisationOne);
-        qualifications.add(organisationTwo);
+            OrganisationPosition topManager = new OrganisationPosition(LocalDate.now(), LocalDate.now(), "ПарадМенеджер" + i);
+            OrganisationPosition megaManager = new OrganisationPosition(LocalDate.now(), LocalDate.now(), "КомбинаторМенеджер" + i);
 
-        res.setSectionType(new OrganisationSection(qualifications), SectionType.EXPERIENCE);
+            Organisation organisationOne = new Organisation("Рога и копыта" + i, "РогаИКопыта.РФ+i", topManager);
+            Organisation organisationTwo = new Organisation("ШахматныйТурнир" + i, "Васюки.РФ+i", megaManager);
 
-        //Organisation section Education
-        Organisation school = new Organisation("Сельмаш №1", "нет",
-                LocalDate.now(), LocalDate.now(), "Уверенный хорошист по выгулу коров, твердая пятерка по рыбалке ");
-        Organisation univercity = new Organisation("Тракторный завод имени Васюткина", "SpBsmdb.РФ",
-                LocalDate.now(), LocalDate.now(), "Создание трактора- это тонки и очень кропотливый труд!");
-      univercity.addNewWork(LocalDate.now(),LocalDate.now(),"Аспирантура. Тема диссертации: исслеование использования " +
-              "турбированных тракторов на качестов засева полей");
+            List<Organisation> qualifications = new ArrayList<>();
 
-        List<Organisation> education = new ArrayList<>();
+            qualifications.add(organisationOne);
+            qualifications.add(organisationTwo);
 
-        education.add(school);
-        education.add(univercity);
+            resumeArray[i].setSectionType(new OrganisationSection(qualifications), SectionType.EXPERIENCE);
 
-        res.setSectionType(new OrganisationSection(education), SectionType.EDUCATION);
+            System.out.println(resumeArray[i].getSectionTypeData(SectionType.EXPERIENCE));
 
+            //Organisation section Education
+
+            OrganisationPosition schoolChild = new OrganisationPosition(LocalDate.now(), LocalDate.now(),
+                    "Отпетый Ботан " + i);
+            OrganisationPosition student = new OrganisationPosition(LocalDate.now(), LocalDate.now(), "Брутальный Магистр." + i);
+            OrganisationPosition postGraduateStudent = new OrganisationPosition(LocalDate.now(), LocalDate.now(),
+                    "Мегалютый Аспирант" + i);
+
+            Organisation school = new Organisation("Школа №" + i, "нет", schoolChild);
+            Organisation university = new Organisation("Тракторный завод имени Васюткина" + i, "SpBsmdb.РФ" + i, student);
+
+            university.addOrganisationPosition(postGraduateStudent);
+
+            List<Organisation> education = new ArrayList<>();
+
+            education.add(school);
+            education.add(university);
+
+            resumeArray[i].setSectionType(new OrganisationSection(education), SectionType.EDUCATION);
+
+            System.out.println(resumeArray[i].getSectionTypeData(SectionType.EDUCATION));
+        }
     }
 
     @Test
@@ -121,7 +135,7 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void updateExist() throws Exception {
-        Resume copyResume1 = new Resume("uuid1","fullName1");
+        Resume copyResume1 = new Resume("uuid1", "fullName1");
         storage.update(resume1);
         Assert.assertEquals(storage.get("uuid1"), copyResume1);
     }
@@ -141,7 +155,7 @@ public abstract class AbstractStorageTest {
     public void deleteExist() throws Exception {
         storage.delete(UUID_1);
         Assert.assertEquals(storage.size(), 2);
-       storage.get("uuid1");
+        storage.get("uuid1");
     }
 
     @Test(expected = NotExistStorageException.class)

@@ -16,10 +16,10 @@ public abstract class AbstractStorage<SearchKey> implements Storage {
 
     public abstract int size();
 
-    public abstract void clear() throws IOException;
+    public abstract void clear();
 
     @Override
-    public Resume get(String uuid) throws IOException {
+    public Resume get(String uuid) {
         LOG.info("Get " + uuid);
         SearchKey searchKey = getExistedSearchKey(uuid);
 
@@ -34,7 +34,7 @@ public abstract class AbstractStorage<SearchKey> implements Storage {
     }
 
     @Override
-    public void save(Resume resume) throws IOException {
+    public void save(Resume resume) {
         LOG.info("Save " + resume);
         SearchKey searchKey = getNotExistedSearchKey(resume.getUuid());
         saveNewResume(resume, searchKey);
@@ -65,24 +65,24 @@ public abstract class AbstractStorage<SearchKey> implements Storage {
         return searchKey;
     }
 
-    public List<Resume> getAllSorted() throws IOException {
+    public List<Resume> getAllSorted() {
         LOG.warning("getAllSort");
         List list = getSortableList();
         Collections.sort(list, Comparator.comparing(Resume::getFullName).thenComparing(Resume::getUuid));
         return list;
     }
 
-    protected abstract List<Resume> getSortableList() throws IOException;
+    protected abstract List<Resume> getSortableList();
 
     protected abstract boolean isExist(SearchKey searchKey);
 
     protected abstract SearchKey getSearchKey(String uuid);
 
-    protected abstract Resume getResume(SearchKey index) throws IOException;
+    protected abstract Resume getResume(SearchKey index);
 
     protected abstract void updateResume(SearchKey index, Resume resume);
 
     protected abstract void deleteResume(SearchKey index);
 
-    protected abstract void saveNewResume(Resume resume, SearchKey index) throws IOException;
+    protected abstract void saveNewResume(Resume resume, SearchKey index);
 }

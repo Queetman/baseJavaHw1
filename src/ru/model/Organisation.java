@@ -17,7 +17,6 @@ public class Organisation {
         this.organisation = organisation;
         this.link = link;
         positions.add(organisationPosition);
-
     }
 
     @Override
@@ -30,7 +29,6 @@ public class Organisation {
                     "Конец работы: " + orgPos.getEndDate() + "\n" +
                     "Описание: " + orgPos.getData() + "\n";
         }
-
         return "Организация: " + organisation + "\n" +
                 "Сайт: " + link + "\n" + stringPositions;
     }

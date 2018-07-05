@@ -24,16 +24,21 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
 
     @Override
     public int size() {
-        return directory.listFiles().length;
+        File[] files = directory.listFiles();
+        if (files != null)
+
+            return files.length;
+        else throw new StorageException("IO error", "directory is empty ");
     }
 
     @Override
     public void clear() {
-        if (directory.exists()) {
-            for (File file : Objects.requireNonNull(directory.listFiles())) {
+        File[] files = directory.listFiles();
+        if (files != null) {
+            for (File file : files) {
                 deleteResume(file);
             }
-        }
+        } else throw new StorageException("IO error", "directory is empty ");
     }
 
     @Override
@@ -43,7 +48,7 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
         File[] files = directory.listFiles();
         resumes = new Resume[files.length];
 
-        if (resumes.length != 0) {
+        if (files != null) {
             for (int i = 0; i < files.length; i++) {
                 resumes[i] = getResume(files[i]);
             }
@@ -84,7 +89,6 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
 
     @Override
     protected void deleteResume(File file) {
-
         if (file.delete()) {
             System.out.println(file.getName() + " deleted");
         } else throw new IllegalArgumentException(file.getName() + " doesn't deleted");

@@ -42,19 +42,19 @@ public abstract class AbstractStorageTest {
         //Contact
         for (int i = 0; i < resumeArray.length; i++) {
 
-            resumeArray[i].setContact("Мобилка " + i, Contacts.TELEPHONE);
-            resumeArray[i].setContact("Скуре " + i, Contacts.SKYPE);
-            resumeArray[i].setContact("Мыло " + i, Contacts.MAIL);
-            resumeArray[i].setContact("Линкин " + i, Contacts.LINKEDIN);
-            resumeArray[i].setContact("Хаб " + i, Contacts.GITHUB);
-            resumeArray[i].setContact("Стак " + i, Contacts.STATCKOVERFLOW);
-            resumeArray[i].setContact("Домашняя страница " + i, Contacts.HOMEPAGE);
+            resumeArray[i].addContact("Мобилка " + i, Contacts.TELEPHONE);
+            resumeArray[i].addContact("Скуре " + i, Contacts.SKYPE);
+            resumeArray[i].addContact("Мыло " + i, Contacts.MAIL);
+            resumeArray[i].addContact("Линкин " + i, Contacts.LINKEDIN);
+            resumeArray[i].addContact("Хаб " + i, Contacts.GITHUB);
+            resumeArray[i].addContact("Стак " + i, Contacts.STATCKOVERFLOW);
+            resumeArray[i].addContact("Домашняя страница " + i, Contacts.HOMEPAGE);
 
             //TextSection Personal
-            resumeArray[i].setSectionType(new TextSection("Паровозик" + i), SectionType.PERSONAL);
+            resumeArray[i].addSection(new TextSection("Паровозик" + i), SectionType.PERSONAL);
 
             //TextSection Objective
-            resumeArray[i].setSectionType(new TextSection("Позитивная" + i), SectionType.OBJECTIVE);
+            resumeArray[i].addSection(new TextSection("Позитивная" + i), SectionType.OBJECTIVE);
 
             //ListSection achievements
             List<String> achievements = new ArrayList<>();
@@ -62,7 +62,7 @@ public abstract class AbstractStorageTest {
             achievements.add("Leeroy" + i);
             achievements.add("Jenkins" + i);
 
-            resumeArray[i].setSectionType(new ListSection(achievements), SectionType.ACHIEVEMENT);
+            resumeArray[i].addSection(new ListSection(achievements), SectionType.ACHIEVEMENT);
 
             //ListSection qualification
             List<String> qualification = new ArrayList<>();
@@ -70,44 +70,44 @@ public abstract class AbstractStorageTest {
             qualification.add("digging manager" + i);
             qualification.add("not digging top  manager" + i);
 
-            resumeArray[i].setSectionType(new ListSection(qualification), SectionType.QUALIFICATIONS);
+            resumeArray[i].addSection(new ListSection(qualification), SectionType.QUALIFICATIONS);
 
-            //OrganisationSection experience
+            //OrganizationSection experience
 
-            OrganisationPosition topManager = new OrganisationPosition(LocalDate.now(), LocalDate.now(), "ПарадМенеджер" + i);
-            OrganisationPosition megaManager = new OrganisationPosition(LocalDate.now(), LocalDate.now(), "КомбинаторМенеджер" + i);
+            Organization.Position topManager = new Organization.Position(LocalDate.now(), LocalDate.now(), "ПарадМенеджер" + i);
+            Organization.Position megaManager = new Organization.Position(LocalDate.now(), LocalDate.now(), "КомбинаторМенеджер" + i);
 
-            Organisation organisationOne = new Organisation("Рога и копыта" + i, "РогаИКопыта.РФ+i", topManager);
-            Organisation organisationTwo = new Organisation("ШахматныйТурнир" + i, "Васюки.РФ+i", megaManager);
+            Organization organizationOne = new Organization("Рога и копыта" + i, "РогаИКопыта.РФ+i", topManager);
+            Organization organizationTwo = new Organization("ШахматныйТурнир" + i, "Васюки.РФ+i", megaManager);
 
-            List<Organisation> qualifications = new ArrayList<>();
+            List<Organization> qualifications = new ArrayList<>();
 
-            qualifications.add(organisationOne);
-            qualifications.add(organisationTwo);
+            qualifications.add(organizationOne);
+            qualifications.add(organizationTwo);
 
-            resumeArray[i].setSectionType(new OrganisationSection(qualifications), SectionType.EXPERIENCE);
+            resumeArray[i].addSection(new OrganizationSection(qualifications), SectionType.EXPERIENCE);
 
             System.out.println(resumeArray[i].getSectionTypeData(SectionType.EXPERIENCE));
 
-            //Organisation section Education
+            //Organization section Education
 
-            OrganisationPosition schoolChild = new OrganisationPosition(LocalDate.now(), LocalDate.now(),
+            Organization.Position schoolChild = new Organization.Position(LocalDate.now(), LocalDate.now(),
                     "Отпетый Ботан " + i);
-            OrganisationPosition student = new OrganisationPosition(LocalDate.now(), LocalDate.now(), "Брутальный Магистр." + i);
-            OrganisationPosition postGraduateStudent = new OrganisationPosition(LocalDate.now(), LocalDate.now(),
+            Organization.Position student = new Organization.Position(LocalDate.now(), LocalDate.now(), "Брутальный Магистр." + i);
+            Organization.Position postGraduateStudent = new Organization.Position(LocalDate.now(), LocalDate.now(),
                     "Мегалютый Аспирант" + i);
 
-            Organisation school = new Organisation("Школа №" + i, "нет", schoolChild);
-            Organisation university = new Organisation("Тракторный завод имени Васюткина" + i, "SpBsmdb.РФ" + i, student);
+            Organization school = new Organization("Школа №" + i, "нет", schoolChild);
+            Organization university = new Organization("Тракторный завод имени Васюткина" + i, "SpBsmdb.РФ" + i, student);
 
             university.addOrganisationPosition(postGraduateStudent);
 
-            List<Organisation> education = new ArrayList<>();
+            List<Organization> education = new ArrayList<>();
 
             education.add(school);
             education.add(university);
 
-            resumeArray[i].setSectionType(new OrganisationSection(education), SectionType.EDUCATION);
+            resumeArray[i].addSection(new OrganizationSection(education), SectionType.EDUCATION);
 
             System.out.println(resumeArray[i].getSectionTypeData(SectionType.EDUCATION));
         }

@@ -2,7 +2,6 @@ import java.io.File;
 
 public class MainFile {
 
-
     public static void main(String[] args) {
 
         File dir = new File("./src/ru/");

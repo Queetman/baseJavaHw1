@@ -67,11 +67,11 @@ public class Resume implements Comparable<Resume> {
         return sections.get(type).getData();
     }
 
-    public void setContact(String contact,Contacts contactName){
+    public void addContact(String contact, Contacts contactName){
         contacts.put(contactName,contact);
     }
 
-    public void setSectionType(Section section,SectionType sectionName){
+    public void addSection(Section section, SectionType sectionName){
         sections.put(sectionName,section);
     }
 

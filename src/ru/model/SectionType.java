@@ -5,8 +5,8 @@ public enum SectionType {
     OBJECTIVE("Позиция"),//textSection
     ACHIEVEMENT("Достижения"),//listSection
     QUALIFICATIONS("Квалификация"),//listSection
-    EXPERIENCE("Опыт работы"),//OrganisationSection
-    EDUCATION("Образование");//OrganisationSection
+    EXPERIENCE("Опыт работы"),//OrganizationSection
+    EDUCATION("Образование");//OrganizationSection
 
     private String title;
 

@@ -1,16 +1,21 @@
 package ru.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class OrganisationSection extends Section {
+public class OrganizationSection extends Section {
 
-    private List<Organisation> qualification;
+    private List<Organization> qualification;
 
-    public OrganisationSection(List<Organisation> qualification) {
+    public OrganizationSection(List<Organization> qualification) {
         Objects.requireNonNull(qualification, "qualification must be not null");
         this.qualification = qualification;
+    }
+
+    public OrganizationSection(Organization ... organizations) {
+       this(Arrays.asList(organizations));
     }
 
     @Override
@@ -18,7 +23,7 @@ public class OrganisationSection extends Section {
 
         List<String> data = new ArrayList();
 
-        for (Organisation q :
+        for (Organization q :
                 qualification) {
             data.add(q.toString());
         }
@@ -29,7 +34,7 @@ public class OrganisationSection extends Section {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        OrganisationSection that = (OrganisationSection) o;
+        OrganizationSection that = (OrganizationSection) o;
         return Objects.equals(qualification, that.qualification);
     }
 

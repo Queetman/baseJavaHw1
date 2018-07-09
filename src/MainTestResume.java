@@ -11,13 +11,13 @@ public class MainTestResume {
     public static void main(String[] args) {
 
         //Contact test
-        res.setContact("Мобилка", Contacts.TELEPHONE);
-        res.setContact("Скуре", Contacts.SKYPE);
-        res.setContact("Мыло", Contacts.MAIL);
-        res.setContact("Линкин", Contacts.LINKEDIN);
-        res.setContact("Хаб", Contacts.GITHUB);
-        res.setContact("Стак", Contacts.STATCKOVERFLOW);
-        res.setContact("Домашняя страница ", Contacts.HOMEPAGE);
+        res.addContact("Мобилка", Contacts.TELEPHONE);
+        res.addContact("Скуре", Contacts.SKYPE);
+        res.addContact("Мыло", Contacts.MAIL);
+        res.addContact("Линкин", Contacts.LINKEDIN);
+        res.addContact("Хаб", Contacts.GITHUB);
+        res.addContact("Стак", Contacts.STATCKOVERFLOW);
+        res.addContact("Домашняя страница ", Contacts.HOMEPAGE);
 
         System.out.println(res.getContact(Contacts.TELEPHONE));
         System.out.println(res.getContact(Contacts.SKYPE));
@@ -29,12 +29,12 @@ public class MainTestResume {
         System.out.println(res.getContact(Contacts.GITHUB) + "\n");
 
         //TextSection Personal
-        res.setSectionType(new TextSection("Паровозик, который смог"), SectionType.PERSONAL);
+        res.addSection(new TextSection("Паровозик, который смог"), SectionType.PERSONAL);
 
         print(SectionType.PERSONAL);
 
         //TextSection Objective
-        res.setSectionType(new TextSection("Позитивная, смог же)"), SectionType.OBJECTIVE);
+        res.addSection(new TextSection("Позитивная, смог же)"), SectionType.OBJECTIVE);
 
         print(SectionType.OBJECTIVE);
 
@@ -44,7 +44,7 @@ public class MainTestResume {
         achievements.add("Leeroy");
         achievements.add("Jenkins");
 
-        res.setSectionType(new ListSection(achievements), SectionType.ACHIEVEMENT);
+        res.addSection(new ListSection(achievements), SectionType.ACHIEVEMENT);
 
         print(SectionType.ACHIEVEMENT);
 
@@ -54,47 +54,47 @@ public class MainTestResume {
         qualification.add("digging manager");
         qualification.add("not digging top  manager");
 
-        res.setSectionType(new ListSection(qualification), SectionType.QUALIFICATIONS);
+        res.addSection(new ListSection(qualification), SectionType.QUALIFICATIONS);
 
         print(SectionType.QUALIFICATIONS);
 
-        //OrganisationSection experience
+        //OrganizationSection experience
 
-        OrganisationPosition topManager=new OrganisationPosition(LocalDate.now(), LocalDate.now(), "Большой опыт командованиия парадами");
-        OrganisationPosition megaManager=new OrganisationPosition(LocalDate.now(), LocalDate.now(), "Великиий шахматист и комбинатор");
+        Organization.Position topManager=new Organization.Position(LocalDate.now(), LocalDate.now(), "Большой опыт командованиия парадами");
+        Organization.Position megaManager=new Organization.Position(LocalDate.now(), LocalDate.now(), "Великиий шахматист и комбинатор");
 
-        Organisation organisationOne = new Organisation("Рога и копыта", "РогаИКопыта.РФ",topManager);
-        Organisation organisationTwo = new Organisation("ШахматныйТурнир", "Васюки.РФ", megaManager);
+        Organization organizationOne = new Organization("Рога и копыта", "РогаИКопыта.РФ",topManager);
+        Organization organizationTwo = new Organization("ШахматныйТурнир", "Васюки.РФ", megaManager);
 
-        List<Organisation> qualifications = new ArrayList<>();
+        List<Organization> qualifications = new ArrayList<>();
 
-        qualifications.add(organisationOne);
-        qualifications.add(organisationTwo);
+        qualifications.add(organizationOne);
+        qualifications.add(organizationTwo);
 
-        res.setSectionType(new OrganisationSection(qualifications), SectionType.EXPERIENCE);
+        res.addSection(new OrganizationSection(qualifications), SectionType.EXPERIENCE);
 
         System.out.println(res.getSectionTypeData(SectionType.EXPERIENCE));
 
-        //Organisation section Education
+        //Organization section Education
 
-        OrganisationPosition schoolChild = new OrganisationPosition(LocalDate.now(), LocalDate.now(),
+        Organization.Position schoolChild = new Organization.Position(LocalDate.now(), LocalDate.now(),
                 "Уверенный хорошист по выгулу коров, твердая пятерка по рыбалке ");
-        OrganisationPosition student = new OrganisationPosition(LocalDate.now(), LocalDate.now(), "Магистр. Тема: Исследование влияния магнитного" +
+        Organization.Position student = new Organization.Position(LocalDate.now(), LocalDate.now(), "Магистр. Тема: Исследование влияния магнитного" +
                 "поля на форму мечей пр перековке их на орала в печах с индуктивным нагревом.");
-        OrganisationPosition postGraduateStudent = new OrganisationPosition(LocalDate.now(), LocalDate.now(),
+        Organization.Position postGraduateStudent = new Organization.Position(LocalDate.now(), LocalDate.now(),
                  "Аспирантура. Тема диссертации: исследование использования турбированных тракторов на качество засева полей");
 
-        Organisation school = new Organisation("Школа №1", "нет", schoolChild);
-        Organisation university = new Organisation("Тракторный завод имени Васюткина", "SpBsmdb.РФ", student);
+        Organization school = new Organization("Школа №1", "нет", schoolChild);
+        Organization university = new Organization("Тракторный завод имени Васюткина", "SpBsmdb.РФ", student);
 
         university.addOrganisationPosition(postGraduateStudent);
 
-        List<Organisation> education = new ArrayList<>();
+        List<Organization> education = new ArrayList<>();
 
         education.add(school);
         education.add(university);
 
-        res.setSectionType(new OrganisationSection(education), SectionType.EDUCATION);
+        res.addSection(new OrganizationSection(education), SectionType.EDUCATION);
 
         System.out.println(res.getSectionTypeData(SectionType.EDUCATION));
     }

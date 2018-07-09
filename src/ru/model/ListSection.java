@@ -1,5 +1,6 @@
 package ru.model;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -10,6 +11,10 @@ public class ListSection extends Section {
     public ListSection(List<String> list) {
         Objects.requireNonNull(list, "list must be not null");
         this.list = list;
+    }
+
+    public ListSection(String ... items) {
+      this(Arrays.asList(items));
     }
 
     @Override

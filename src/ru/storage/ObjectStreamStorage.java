@@ -2,7 +2,6 @@ package ru.storage;
 
 import ru.exception.StorageException;
 import ru.model.Resume;
-
 import java.io.*;
 
 public class ObjectStreamStorage extends AbstractFileStorage {

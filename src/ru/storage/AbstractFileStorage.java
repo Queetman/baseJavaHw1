@@ -24,10 +24,10 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
     @Override
     public int size() {
         File[] files = directory.listFiles();
-        if (files != null)
+        if (files != null) {
 
             return files.length;
-        else throw new StorageException("IO error", "directory is empty ");
+        } else throw new StorageException("IO error", "directory is empty ");
     }
 
     @Override

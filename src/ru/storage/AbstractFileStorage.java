@@ -69,7 +69,7 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
     @Override
     protected Resume getResume(File file) {
         try {
-            return doRead(new  BufferedInputStream(new FileInputStream(file)));
+            return doRead(new BufferedInputStream(new FileInputStream(file)));
         } catch (IOException e) {
             throw new StorageException("IO error", file.getName(), e);
         }
@@ -78,7 +78,7 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
     @Override
     protected void updateResume(File file, Resume resume) {
         try {
-            doWrite(resume,new BufferedOutputStream(new FileOutputStream(file)));
+            doWrite(resume, new BufferedOutputStream(new FileOutputStream(file)));
         } catch (IOException e) {
             throw new StorageException("IO error", file.getName(), e);
         }
@@ -101,8 +101,8 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
         updateResume(file, resume);
     }
 
-    protected abstract void doWrite(Resume resume, OutputStream file) throws IOException;
+    protected abstract void doWrite(Resume resume, OutputStream outputStream) throws IOException;
 
-    protected abstract Resume doRead(InputStream file) throws IOException;
+    protected abstract Resume doRead(InputStream inputStream) throws IOException;
 }
 

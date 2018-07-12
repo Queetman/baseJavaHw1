@@ -3,13 +3,17 @@ package ru.model;
 import java.util.Objects;
 
 public class TextSection extends Section {
-   private String text;
+
+    private static final long serialVersionUID = 1L;
+
+    private String text;
 
     public TextSection(String text) {
-        Objects.requireNonNull(text,"text must be not null");
+        Objects.requireNonNull(text, "text must be not null");
         this.text = text;
     }
-@Override
+
+    @Override
     public String getData() {
         return text;
     }

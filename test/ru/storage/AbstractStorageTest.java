@@ -7,6 +7,7 @@ import ru.exception.ExistStorageException;
 import ru.exception.NotExistStorageException;
 import ru.model.*;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -14,6 +15,7 @@ import java.util.*;
 public abstract class AbstractStorageTest {
 
     Storage storage;
+    protected static final File STORAGE_DIR =new File("C:\\Users\\queeman\\Desktop\\basejava\\storage");
 
     public AbstractStorageTest(Storage storage) {
         this.storage = storage;

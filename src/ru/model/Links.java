@@ -1,8 +1,11 @@
 package ru.model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Links {
+public class Links implements Serializable {
+
+    private static final long serialVersionUID=1L;
 
    private String name;
    private String link;

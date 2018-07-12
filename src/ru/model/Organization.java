@@ -1,11 +1,14 @@
 package ru.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Organization {
+public class Organization implements Serializable {
+
+    private static final long serialVersionUID=1L;
 
     private String organisation;
     private String link;
@@ -59,7 +62,7 @@ public class Organization {
         return Objects.hash(organisation, link, positions);
     }
 
-    public static class Position {
+    public static class Position implements Serializable {
        private LocalDate startDate;
        private LocalDate endDate;
         private String data;

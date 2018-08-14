@@ -1,24 +1,22 @@
-package ru.storage;
-
+package ru.serializer;
 
 import ru.exception.StorageException;
 import ru.model.Resume;
+import ru.serializer.StreamSerializer;
+
 import java.io.*;
 
-public class ObjectStreamPathStorage extends AbstractPathStorage {
-    protected ObjectStreamPathStorage(String directory) {
-        super(directory);
-    }
+public class ObjectStreamSerializer implements StreamSerializer {
 
     @Override
-    protected void doWrite(Resume resume, OutputStream outputStream) throws IOException {
+    public void doWrite(Resume resume, OutputStream outputStream) throws IOException {
         try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream)) {
             objectOutputStream.writeObject(resume);
         }
     }
 
     @Override
-    protected Resume doRead(InputStream inputStream) throws IOException {
+   public Resume doRead(InputStream inputStream) throws IOException {
         try (ObjectInputStream objectInputStream = new ObjectInputStream(inputStream)) {
             return (Resume) objectInputStream.readObject();
         } catch (ClassNotFoundException e) {

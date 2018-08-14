@@ -14,8 +14,10 @@ public class MainFile {
             File[] files = directory.listFiles();
             for (File file : files) {
                 if (file.isDirectory()) {
+                    System.out.println("Dir: " + file.getName());
                     getFileNames(file);
-                } else System.out.println(file.getName());
+                }
+                else System.out.println("     File:" + file.getName());
             }
         }
     }

@@ -10,14 +10,15 @@ public class MainFile {
 
     private static void getFileNames(File directory) {
 
+        String offset = "   ";
+
         if (directory.isDirectory()) {
             File[] files = directory.listFiles();
             for (File file : files) {
                 if (file.isDirectory()) {
-                    System.out.println("Dir: " + file.getName());
+                    System.out.println(offset + "Dir: " + file.getName());
                     getFileNames(file);
                 }
-                else System.out.println("     File:" + file.getName());
             }
         }
     }

@@ -23,22 +23,16 @@ public class PathStorage extends AbstractStorage<Path> {
         if (!Files.isDirectory(directory) || !Files.isWritable(directory)) {
             throw new IllegalArgumentException(dir + " is not directory or is not writable");
         }
-        this.streamSerializerStrategy=streamSerializerStrategy;
+        this.streamSerializerStrategy = streamSerializerStrategy;
     }
 
     @Override
     public int size() {
-        File[] files = directory.toFile().listFiles();
-
-        if (files != null) {
-            int size = 0;
-            for (File file : files) {
-                if (file.isFile()) {
-                    size++;
-                }
-            }
-            return size;
-        } else throw new StorageException("IO error", "directory is empty ");
+        try {
+            return (int) Files.list(directory).count();
+        } catch (IOException e) {
+            throw new StorageException("Directory error", null);
+        }
     }
 
     @Override
@@ -54,7 +48,12 @@ public class PathStorage extends AbstractStorage<Path> {
     protected List<Resume> getSortableList() {
 
         Resume[] resumes;
-        File[] files = directory.toFile().listFiles();
+        File[] files = new File[0];
+        try {
+            files = (File[]) Files.list(directory).toArray();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         resumes = new Resume[files.length];
 
         if (files != null) {
@@ -67,7 +66,7 @@ public class PathStorage extends AbstractStorage<Path> {
 
     @Override
     protected boolean isExist(Path path) {
-        return path.toFile().exists();
+        return Files.isRegularFile(path);
     }
 
     @Override

@@ -8,9 +8,12 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+
+import static java.nio.file.Files.list;
 
 public class PathStorage extends AbstractStorage<Path> {
 
@@ -29,7 +32,7 @@ public class PathStorage extends AbstractStorage<Path> {
     @Override
     public int size() {
         try {
-            return (int) Files.list(directory).count();
+            return (int) list(directory).count();
         } catch (IOException e) {
             throw new StorageException("Directory error", null);
         }
@@ -38,7 +41,7 @@ public class PathStorage extends AbstractStorage<Path> {
     @Override
     public void clear() {
         try {
-            Files.list(directory).forEach(this::deleteResume);
+            list(directory).forEach(this::deleteResume);
         } catch (IOException e) {
             throw new StorageException("Path delete error", null);
         }
@@ -46,22 +49,16 @@ public class PathStorage extends AbstractStorage<Path> {
 
     @Override
     protected List<Resume> getSortableList() {
-
-        Resume[] resumes;
-        File[] files = new File[0];
+        List<Resume> resumes = new ArrayList<>();
         try {
-            files = (File[]) Files.list(directory).toArray();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        resumes = new Resume[files.length];
-
-        if (files != null) {
-            for (int i = 0; i < files.length; i++) {
-                resumes[i] = getResume(files[i].toPath());
+            List<Path> files = Files.list(directory).collect(Collectors.toList());
+            for (Path file : files) {
+                resumes.add(getResume(file));
             }
-            return Arrays.asList(resumes);
-        } else throw new StorageException("IO error", "directory is empty ");
+        } catch (IOException e) {
+            throw new StorageException("IO error", "directory is empty ");
+        }
+        return resumes;
     }
 
     @Override

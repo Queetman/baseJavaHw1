@@ -49,16 +49,14 @@ public class PathStorage extends AbstractStorage<Path> {
 
     @Override
     protected List<Resume> getSortableList() {
-        List<Resume> resumes = new ArrayList<>();
+
         try {
-            List<Path> files = Files.list(directory).collect(Collectors.toList());
-            for (Path file : files) {
-                resumes.add(getResume(file));
-            }
+          return   Files.list(directory).map(this::getResume).collect(Collectors.toList());
         } catch (IOException e) {
             throw new StorageException("IO error", "directory is empty ");
         }
-        return resumes;
+
+
     }
 
     @Override

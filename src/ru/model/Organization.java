@@ -1,14 +1,20 @@
 package ru.model;
 
+import ru.util.LocalDateAdapter;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Organization implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     private String organisation;
     private String link;
@@ -26,6 +32,9 @@ public class Organization implements Serializable {
     public Organization(String link, List<Position> positions) {
         this.link = link;
         this.positions = positions;
+    }
+
+    public Organization() {
     }
 
     @Override
@@ -62,18 +71,22 @@ public class Organization implements Serializable {
         return Objects.hash(organisation, link, positions);
     }
 
+    @XmlAccessorType(XmlAccessType.FIELD)
     public static class Position implements Serializable {
-       private LocalDate startDate;
-       private LocalDate endDate;
+        @XmlJavaTypeAdapter(LocalDateAdapter.class)
+        private LocalDate startDate;
+        @XmlJavaTypeAdapter(LocalDateAdapter.class)
+        private LocalDate endDate;
         private String data;
 
         public Position(LocalDate startDate, LocalDate endDate, String data) {
-            this.startDate=startDate;
-            this.endDate= endDate;
-            this.data=data;
+            this.startDate = startDate;
+            this.endDate = endDate;
+            this.data = data;
         }
 
-
+        public Position() {
+        }
 
         public LocalDate getStartDate() {
             return startDate;

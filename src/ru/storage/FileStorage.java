@@ -2,7 +2,7 @@ package ru.storage;
 
 import ru.exception.StorageException;
 import ru.model.Resume;
-import ru.serializer.StreamSerializer;
+import ru.storage.serializer.StreamSerializer;
 
 import java.io.*;
 import java.util.*;
@@ -21,7 +21,7 @@ public class FileStorage extends AbstractStorage<File> {
             throw new IllegalArgumentException(directory.getAbsolutePath() + " is not readable/writable");
         }
         this.directory = directory;
-        this.streamSerializerStrategy=streamSerializerStrategy;
+        this.streamSerializerStrategy = streamSerializerStrategy;
     }
 
     @Override

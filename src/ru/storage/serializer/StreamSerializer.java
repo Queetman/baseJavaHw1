@@ -1,6 +1,7 @@
-package ru.serializer;
+package ru.storage.serializer;
 
 import ru.model.Resume;
+
 import java.io.*;
 
 public interface StreamSerializer {

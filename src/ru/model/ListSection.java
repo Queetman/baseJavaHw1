@@ -13,8 +13,11 @@ public class ListSection extends Section {
         this.list = list;
     }
 
-    public ListSection(String ... items) {
-      this(Arrays.asList(items));
+    public ListSection() {
+    }
+
+    public ListSection(String... items) {
+        this(Arrays.asList(items));
     }
 
     @Override

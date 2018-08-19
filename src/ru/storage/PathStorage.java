@@ -2,13 +2,12 @@ package ru.storage;
 
 import ru.exception.StorageException;
 import ru.model.Resume;
-import ru.serializer.StreamSerializer;
+import ru.storage.serializer.StreamSerializer;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -51,7 +50,7 @@ public class PathStorage extends AbstractStorage<Path> {
     protected List<Resume> getSortableList() {
 
         try {
-          return   Files.list(directory).map(this::getResume).collect(Collectors.toList());
+            return Files.list(directory).map(this::getResume).collect(Collectors.toList());
         } catch (IOException e) {
             throw new StorageException("IO error", "directory is empty ");
         }

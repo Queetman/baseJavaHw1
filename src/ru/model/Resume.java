@@ -1,20 +1,25 @@
 package ru.model;
 
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.*;
 
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)//Jaxb работает с сеттерами. ЧТобы их не писать, можно сделать доступ к полям
 public class Resume implements Comparable<Resume>, Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     // Unique identifier
-    private final String uuid;
+    private String uuid;
 
     private String fullName;
 
-    private Map<Contacts,String> contacts =new EnumMap<>(Contacts.class);
-    private Map<SectionType,Section> sections =new EnumMap<>(SectionType.class);
+    private Map<Contacts, String> contacts = new EnumMap<>(Contacts.class);
+    private Map<SectionType, Section> sections = new EnumMap<>(SectionType.class);
 
     public Resume(String fullName) {
         this(UUID.randomUUID().toString(), fullName);
@@ -28,23 +33,11 @@ public class Resume implements Comparable<Resume>, Serializable {
         this.fullName = fullName;
     }
 
+    public Resume() {
+    }
+
     public String getUuid() {
         return uuid;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Resume resume = (Resume) o;
-
-        return uuid.equals(resume.uuid);
-    }
-
-    @Override
-    public int hashCode() {
-        return uuid.hashCode();
     }
 
     @Override
@@ -61,21 +54,37 @@ public class Resume implements Comparable<Resume>, Serializable {
         return fullName;
     }
 
-    public String getContact (Contacts contact){
-       return contacts.get(contact);
+    public String getContact(Contacts contact) {
+        return contacts.get(contact);
     }
 
-    public Object getSectionTypeData (SectionType type ){
+    public Object getSectionTypeData(SectionType type) {
 
         return sections.get(type).getData();
     }
 
-    public void addContact(String contact, Contacts contactName){
-        contacts.put(contactName,contact);
+    public void addContact(String contact, Contacts contactName) {
+        contacts.put(contactName, contact);
     }
 
-    public void addSection(Section section, SectionType sectionName){
-        sections.put(sectionName,section);
+    public void addSection(Section section, SectionType sectionName) {
+        sections.put(sectionName, section);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Resume resume = (Resume) o;
+        return Objects.equals(uuid, resume.uuid) &&
+                Objects.equals(fullName, resume.fullName) &&
+                Objects.equals(contacts, resume.contacts) &&
+                Objects.equals(sections, resume.sections);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(uuid, fullName, contacts, sections);
+    }
 }

@@ -13,6 +13,9 @@ public class TextSection extends Section {
         this.text = text;
     }
 
+    public TextSection() {
+    }
+
     @Override
     public String getData() {
         return text;

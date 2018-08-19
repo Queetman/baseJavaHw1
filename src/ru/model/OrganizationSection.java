@@ -14,8 +14,11 @@ public class OrganizationSection extends Section {
         this.qualification = qualification;
     }
 
-    public OrganizationSection(Organization ... organizations) {
-       this(Arrays.asList(organizations));
+    public OrganizationSection(Organization... organizations) {
+        this(Arrays.asList(organizations));
+    }
+
+    public OrganizationSection() {
     }
 
     @Override

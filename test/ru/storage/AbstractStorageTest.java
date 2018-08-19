@@ -138,7 +138,7 @@ public abstract class AbstractStorageTest {
     @Test
     public void updateExist() throws Exception {
         Resume copyResume1 = new Resume("uuid1", "fullName1");
-        storage.update(resume1);
+        storage.update(copyResume1);
         Assert.assertEquals(storage.get("uuid1"), copyResume1);
     }
 

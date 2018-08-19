@@ -1,20 +1,26 @@
 package ru.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class Links implements Serializable {
+@XmlAccessorType(XmlAccessType.FIELD)
+public class Link implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
-   private String name;
-   private String link;
+    private String name;
+    private String link;
 
-    public Links(String name, String link) {
-        Objects.requireNonNull(name,"name must be not null");
-        Objects.requireNonNull(link,"link must be not null");
+    public Link(String name, String link) {
+        Objects.requireNonNull(name, "name must be not null");
+        Objects.requireNonNull(link, "link must be not null");
         this.name = name;
         this.link = link;
+    }
+
+    public Link() {
     }
 
     public String getName() {
@@ -37,9 +43,9 @@ public class Links implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Links links = (Links) o;
-        return Objects.equals(name, links.name) &&
-                Objects.equals(link, links.link);
+        Link link = (Link) o;
+        return Objects.equals(name, link.name) &&
+                Objects.equals(this.link, link.link);
     }
 
     @Override

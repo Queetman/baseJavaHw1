@@ -1,9 +1,9 @@
 package ru.storage;
 
-import ru.serializer.ObjectStreamSerializer;
+import ru.storage.serializer.ObjectStreamSerializer;
 
 public class ObjectFileStorageTest extends AbstractStorageTest {
     public ObjectFileStorageTest() {
-        super(new FileStorage(STORAGE_DIR,new ObjectStreamSerializer()));
+        super(new FileStorage(STORAGE_DIR, new ObjectStreamSerializer()));
     }
 }

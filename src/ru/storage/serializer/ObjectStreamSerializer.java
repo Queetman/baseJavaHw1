@@ -1,8 +1,7 @@
-package ru.serializer;
+package ru.storage.serializer;
 
 import ru.exception.StorageException;
 import ru.model.Resume;
-import ru.serializer.StreamSerializer;
 
 import java.io.*;
 
@@ -16,7 +15,7 @@ public class ObjectStreamSerializer implements StreamSerializer {
     }
 
     @Override
-   public Resume doRead(InputStream inputStream) throws IOException {
+    public Resume doRead(InputStream inputStream) throws IOException {
         try (ObjectInputStream objectInputStream = new ObjectInputStream(inputStream)) {
             return (Resume) objectInputStream.readObject();
         } catch (ClassNotFoundException e) {

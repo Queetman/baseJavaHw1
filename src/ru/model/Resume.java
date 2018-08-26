@@ -63,11 +63,11 @@ public class Resume implements Comparable<Resume>, Serializable {
         return sections.get(type).getData();
     }
 
-    public void addContact(String contact, Contacts contactName) {
+    public void addContact(Contacts contactName,String contact) {
         contacts.put(contactName, contact);
     }
 
-    public void addSection(Section section, SectionType sectionName) {
+    public void addSection(SectionType sectionName,Section section ) {
         sections.put(sectionName, section);
     }
 
@@ -86,5 +86,17 @@ public class Resume implements Comparable<Resume>, Serializable {
     public int hashCode() {
 
         return Objects.hash(uuid, fullName, contacts, sections);
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public Map<Contacts, String> getContacts() {
+        return contacts;
+    }
+
+    public Map<SectionType, Section> getSections() {
+        return sections;
     }
 }

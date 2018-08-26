@@ -21,12 +21,11 @@ public class Organization implements Serializable {
     private List<Position> positions = new ArrayList<>();
 
 
-    public Organization(String organisation, String link, Position position) {
+    public Organization(String organisation, String link, Position ...positions) {
         Objects.requireNonNull(organisation, "organisation must be not null");
-        Objects.requireNonNull(position, "Position must be not null");
+        Objects.requireNonNull(positions, "Position must be not null");
         this.organisation = organisation;
         this.link = link;
-        positions.add(position);
     }
 
     public Organization(String link, List<Position> positions) {
@@ -78,11 +77,13 @@ public class Organization implements Serializable {
         @XmlJavaTypeAdapter(LocalDateAdapter.class)
         private LocalDate endDate;
         private String data;
+        private String description;
 
-        public Position(LocalDate startDate, LocalDate endDate, String data) {
+        public Position(LocalDate startDate, LocalDate endDate, String data, String description) {
             this.startDate = startDate;
             this.endDate = endDate;
             this.data = data;
+            this.description=description;
         }
 
         public Position() {
@@ -99,14 +100,8 @@ public class Organization implements Serializable {
         public String getData() {
             return data;
         }
-
-        @Override
-        public String toString() {
-            return "Position{" +
-                    "startDate=" + startDate +
-                    ", endDate=" + endDate +
-                    ", data='" + data + '\'' +
-                    '}';
+        public String getDescription() {
+            return description;
         }
 
         @Override
@@ -124,5 +119,17 @@ public class Organization implements Serializable {
 
             return Objects.hash(startDate, endDate, data);
         }
+    }
+
+    public String getOrganisation() {
+        return organisation;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public List<Position> getPositions() {
+        return positions;
     }
 }

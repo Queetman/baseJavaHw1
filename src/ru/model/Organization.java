@@ -27,7 +27,9 @@ public class Organization implements Serializable {
     }
 
     public Organization(String name, String url, Position... positions) {
-        this(new Link(name, url), Arrays.asList(positions));
+        homePage=new Link(name,url);
+        List list = Arrays.asList(positions);
+        this.positions = new ArrayList(list);
     }
 
     public Organization(Link homePage, List<Position> positions) {
@@ -41,6 +43,10 @@ public class Organization implements Serializable {
 
     public List<Position> getPositions() {
         return positions;
+    }
+
+    public void addPosition(Position position) {
+        positions.add(position);
     }
 
     @Override

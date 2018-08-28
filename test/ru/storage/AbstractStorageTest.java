@@ -102,6 +102,8 @@ public abstract class AbstractStorageTest {
             Organization school = new Organization("Школа №" + i, "нет", schoolChild);
             Organization university = new Organization("Тракторный завод имени Васюткина" + i, "SpBsmdb.РФ" + i, student);
 
+            university.addPosition(postGraduateStudent);
+
             List<Organization> education = new ArrayList<>();
 
             education.add(school);

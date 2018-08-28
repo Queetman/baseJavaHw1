@@ -88,6 +88,8 @@ public class MainTestResume {
 
         Organization university = new Organization("Тракторный завод имени Васюткина", "SpBsmdb.РФ", student);
 
+     //   university.addPosition(postGraduateStudent);
+
         List<Organization> education = new ArrayList<>();
 
         education.add(school);

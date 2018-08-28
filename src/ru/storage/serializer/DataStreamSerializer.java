@@ -2,7 +2,6 @@ package ru.storage.serializer;
 
 import ru.model.*;
 
-import javax.swing.text.Position;
 import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -16,13 +15,17 @@ public class DataStreamSerializer implements StreamSerializer {
     @Override
     public void doWrite(Resume r, OutputStream os) throws IOException {
         try (DataOutputStream dataOutputStream = new DataOutputStream(os)) {
+
             dataOutputStream.writeUTF(r.getUuid());
             dataOutputStream.writeUTF(r.getFullName());
+
             Map<Contacts, String> contacts = r.getContacts();
+
             writeCollection(dataOutputStream, contacts.entrySet(), entry -> {
                 dataOutputStream.writeUTF(entry.getKey().name());
                 dataOutputStream.writeUTF(entry.getValue());
             });
+            //  done
 
             writeCollection(dataOutputStream, r.getSections().entrySet(), entry -> {
                 SectionType type = entry.getKey();
@@ -40,12 +43,12 @@ public class DataStreamSerializer implements StreamSerializer {
                     case EXPERIENCE:
                     case EDUCATION:
                         writeCollection(dataOutputStream, ((OrganizationSection) section).getOrganizations(), org -> {
-                            dataOutputStream.writeUTF(org.getLink());
-                            dataOutputStream.writeUTF(org.getOrganisation());
-                            writeCollection(dataOutputStream, org.getPositions(), (Organization.Position position) -> {
+                            dataOutputStream.writeUTF(org.getHomePage().getName());
+                            dataOutputStream.writeUTF(org.getHomePage().getLink());
+                            writeCollection(dataOutputStream, org.getPositions(), position -> {
                                 writeLocalDate(dataOutputStream, position.getStartDate());
                                 writeLocalDate(dataOutputStream, position.getEndDate());
-                                dataOutputStream.writeUTF(position.getData());
+                                dataOutputStream.writeUTF(position.getTitle());
                                 dataOutputStream.writeUTF(position.getDescription());
                             });
                         });
@@ -70,7 +73,9 @@ public class DataStreamSerializer implements StreamSerializer {
             String uuid = dataInputStream.readUTF();
             String fullName = dataInputStream.readUTF();
             Resume resume = new Resume(uuid, fullName);
-            readItems(dataInputStream, () -> resume.addContact(Contacts.valueOf(dataInputStream.readUTF()), dataInputStream.readUTF()));
+
+            readItems(dataInputStream, () ->
+                    resume.addContact(Contacts.valueOf(dataInputStream.readUTF()), dataInputStream.readUTF()));
             readItems(dataInputStream, () -> {
                 SectionType sectionType = SectionType.valueOf(dataInputStream.readUTF());
                 resume.addSection(sectionType, readSection(dataInputStream, sectionType));
@@ -90,10 +95,10 @@ public class DataStreamSerializer implements StreamSerializer {
             case EXPERIENCE:
             case EDUCATION:
                 return new OrganizationSection(
-                        (Organization) readList(dataInputStream, () -> new Organization(
-                                dataInputStream.readUTF(), dataInputStream.readUTF(),
-                                (Organization.Position) readList(dataInputStream, () -> new Organization.Position(
-                                        this.readLocalDate(dataInputStream), readLocalDate(dataInputStream), dataInputStream.readUTF(), dataInputStream.readUTF()
+                        readList(dataInputStream, () -> new Organization(
+                                new Link(dataInputStream.readUTF(), dataInputStream.readUTF()),
+                                readList(dataInputStream, () -> new Organization.Position(
+                                        readLocalDate(dataInputStream), readLocalDate(dataInputStream), dataInputStream.readUTF(), dataInputStream.readUTF()
                                 ))
                         )));
             default:

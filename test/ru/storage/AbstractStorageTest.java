@@ -102,8 +102,6 @@ public abstract class AbstractStorageTest {
             Organization school = new Organization("Школа №" + i, "нет", schoolChild);
             Organization university = new Organization("Тракторный завод имени Васюткина" + i, "SpBsmdb.РФ" + i, student);
 
-            university.addOrganisationPosition(postGraduateStudent);
-
             List<Organization> education = new ArrayList<>();
 
             education.add(school);
@@ -122,7 +120,7 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void getExistResume() throws Exception {
-        Assert.assertEquals(resume1, storage.get("uuid1"));
+        Assert.assertEquals(resume1.toString(), storage.get("uuid1").toString());
     }
 
     @Test(expected = NotExistStorageException.class)
@@ -145,7 +143,7 @@ public abstract class AbstractStorageTest {
     @Test
     public void save() throws Exception {
         storage.save(resume4);
-        Assert.assertEquals(storage.get(UUID_4), resume4);
+        Assert.assertEquals(storage.get(UUID_4).toString(), resume4.toString());
     }
 
     @Test(expected = ExistStorageException.class)
@@ -175,9 +173,9 @@ public abstract class AbstractStorageTest {
     public void getAll() throws Exception {
         Assert.assertEquals(3, storage.size());
 
-        Assert.assertEquals(storage.get(UUID_1), resume1);
-        Assert.assertEquals(storage.get(UUID_2), resume2);
-        Assert.assertEquals(storage.get(UUID_3), resume3);
+        Assert.assertEquals(storage.get(UUID_1).toString(), resume1.toString());
+        Assert.assertEquals(storage.get(UUID_2).toString(), resume2.toString());
+        Assert.assertEquals(storage.get(UUID_3).toString(), resume3.toString());
     }
 
     @Test

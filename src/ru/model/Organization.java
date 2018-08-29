@@ -28,7 +28,7 @@ public class Organization implements Serializable {
 
     public Organization(String name, String url, Position... positions) {
         homePage=new Link(name,url);
-        List list = Arrays.asList(positions);
+        List<Position> list = Arrays.asList(positions);
         this.positions = new ArrayList(list);
     }
 

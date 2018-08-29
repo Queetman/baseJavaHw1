@@ -63,7 +63,7 @@ public class DataStreamSerializer implements StreamSerializer {
         dos.writeInt(ld.getMonth().getValue());
     }
 
-    private <T> LocalDate readLocalDate(DataInputStream dis) throws IOException {
+    private LocalDate readLocalDate(DataInputStream dis) throws IOException {
         return LocalDate.of(dis.readInt(), dis.readInt(), 1);
     }
 

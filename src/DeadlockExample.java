@@ -1,42 +1,48 @@
+
+
 public class DeadlockExample {
 
-        volatile boolean isNotified = false;
+    public static Object Lock1 = new Object();
+    public static Object Lock2 = new Object();
 
-    /*
-     Первая нить входит в синхронизированный блок метода 2 и ждет.
-      Вторая нить пытается войти в синхронизированный блок метода1, но ждет в очереди.
-       Нить 1 ждет чтобы оповестить и нить 2 ждет в синхронизированном блоке.
-        Все ждут. Дедлок
-     */
-        public synchronized void method1() {
-            try {
-                isNotified = false;
-                while (!isNotified)
-                    wait();
-                notifyAll();
-                System.out.println("Method 1 not notified");
-            } catch (InterruptedException ex) {
-              ex.printStackTrace();
+    public static void main(String args[]) {
+        TestThread1 T1 = new TestThread1();
+        TestThread2 T2 = new TestThread2();
+        T1.start();
+        T2.start();
+    }
+
+    private static class TestThread1 extends Thread {
+        public void run() {
+            synchronized (Lock1) {
+                System.out.println("Thread 1: Holding lock 1...");
+
+                try {
+                    Thread.sleep(1);
+                } catch (InterruptedException e) {
+                }
+                System.out.println("Thread 1: Waiting for lock 2...");
+
+                synchronized (Lock2) {
+                }
             }
-        }
-
-        public synchronized void method2() {
-            try {
-                isNotified = true;
-                while (isNotified)
-                    wait();
-                notifyAll();
-
-                System.out.println("Method 2 notified");
-            } catch (InterruptedException ex) {
-              ex.printStackTrace();
-            }
-        }
-
-        public static void main(String[] args)
-        {
-            DeadlockExample deadlockExample=new DeadlockExample();
-          new Thread(() -> deadlockExample.method2()).start();
-            new Thread(() -> deadlockExample.method1()).start();
         }
     }
+
+    private static class TestThread2 extends Thread {
+        public void run() {
+            synchronized (Lock2) {
+                System.out.println("Thread 2: Holding lock 2...");
+
+                try {
+                    Thread.sleep(1);
+                } catch (InterruptedException e) {
+                }
+                System.out.println("Thread 2: Waiting for lock 1...");
+
+                synchronized (Lock1) {
+                }
+            }
+        }
+    }
+}

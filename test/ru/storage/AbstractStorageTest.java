@@ -3,6 +3,7 @@ package ru.storage;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import ru.Config;
 import ru.exception.ExistStorageException;
 import ru.exception.NotExistStorageException;
 import ru.model.*;
@@ -15,7 +16,7 @@ import java.util.*;
 public abstract class AbstractStorageTest {
 
     Storage storage;
-    protected static final File STORAGE_DIR = new File("C:\\Users\\queeman\\Desktop\\basejava\\storage");
+    protected static final File STORAGE_DIR = Config.get().getStorageDir();
 
     public AbstractStorageTest(Storage storage) {
         this.storage = storage;

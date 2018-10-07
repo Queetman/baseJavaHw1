@@ -15,22 +15,22 @@ import java.util.*;
 //этот класс не тестируется. тестируются наследники
 public abstract class AbstractStorageTest {
 
-    Storage storage;
+   protected Storage storage;
     protected static final File STORAGE_DIR = Config.get().getStorageDir();
 
     public AbstractStorageTest(Storage storage) {
         this.storage = storage;
     }
 
-    private static final String UUID_1 = "uuid1";
-    private static final String UUID_2 = "uuid2";
-    private static final String UUID_3 = "uuid3";
-    private static final String UUID_4 = "uuid4";
+     static final String UUID_1 = "uuid1";
+     static final String UUID_2 = "uuid2";
+     static final String UUID_3 = "uuid3";
+     static final String UUID_4 = "uuid4";
 
-    private static final Resume resume1 = new Resume(UUID_1, "fullName1");
-    private static final Resume resume2 = new Resume(UUID_2, "fullName2");
-    private static final Resume resume3 = new Resume(UUID_3, "fullName3");
-    private static final Resume resume4 = new Resume(UUID_4, "fullName4");
+     static final Resume resume1 = new Resume(UUID_1, "fullName1");
+     static final Resume resume2 = new Resume(UUID_2, "fullName2");
+     static final Resume resume3 = new Resume(UUID_3, "fullName3");
+     static final Resume resume4 = new Resume(UUID_4, "fullName4");
 
     @Before
     public void setUp() throws Exception {
@@ -38,7 +38,7 @@ public abstract class AbstractStorageTest {
         storage.save(resume2);
         storage.save(resume3);
         storage.save(resume1);
-
+/*
         Resume[] resumeArray = {resume1, resume2, resume3, resume4};
 
 
@@ -113,7 +113,7 @@ public abstract class AbstractStorageTest {
             resumeArray[i].addSection(SectionType.EDUCATION, new OrganizationSection(education));
 
             System.out.println(resumeArray[i].getSectionTypeData(SectionType.EDUCATION));
-        }
+        }*/
     }
 
     @Test

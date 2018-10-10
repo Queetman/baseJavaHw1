@@ -6,6 +6,7 @@ import org.junit.Test;
 import ru.Config;
 import ru.exception.ExistStorageException;
 import ru.exception.NotExistStorageException;
+import ru.exception.StorageException;
 import ru.model.*;
 
 import java.io.File;
@@ -15,22 +16,22 @@ import java.util.*;
 //этот класс не тестируется. тестируются наследники
 public abstract class AbstractStorageTest {
 
-   protected Storage storage;
+    protected Storage storage;
     protected static final File STORAGE_DIR = Config.get().getStorageDir();
 
     public AbstractStorageTest(Storage storage) {
         this.storage = storage;
     }
 
-     static final String UUID_1 = "uuid1";
-     static final String UUID_2 = "uuid2";
-     static final String UUID_3 = "uuid3";
-     static final String UUID_4 = "uuid4";
+    static final String UUID_1 = "uuid1";
+    static final String UUID_2 = "uuid2";
+    static final String UUID_3 = "uuid3";
+    static final String UUID_4 = "uuid4";
 
-     static final Resume resume1 = new Resume(UUID_1, "fullName1");
-     static final Resume resume2 = new Resume(UUID_2, "fullName2");
-     static final Resume resume3 = new Resume(UUID_3, "fullName3");
-     static final Resume resume4 = new Resume(UUID_4, "fullName4");
+    static final Resume resume1 = new Resume(UUID_1, "fullName1");
+    static final Resume resume2 = new Resume(UUID_2, "fullName2");
+    static final Resume resume3 = new Resume(UUID_3, "fullName3");
+    static final Resume resume4 = new Resume(UUID_4, "fullName4");
 
     @Before
     public void setUp() throws Exception {
@@ -38,7 +39,7 @@ public abstract class AbstractStorageTest {
         storage.save(resume2);
         storage.save(resume3);
         storage.save(resume1);
-/*
+
         Resume[] resumeArray = {resume1, resume2, resume3, resume4};
 
 
@@ -113,7 +114,7 @@ public abstract class AbstractStorageTest {
             resumeArray[i].addSection(SectionType.EDUCATION, new OrganizationSection(education));
 
             System.out.println(resumeArray[i].getSectionTypeData(SectionType.EDUCATION));
-        }*/
+        }
     }
 
     @Test
@@ -131,7 +132,7 @@ public abstract class AbstractStorageTest {
         Assert.assertEquals(resume1, storage.get("uuid4"));
     }
 
-    @Test(expected = NotExistStorageException.class)
+    @Test(expected = StorageException.class)
     public void updateNotExist() throws Exception {
         storage.update(resume4);
     }
@@ -140,7 +141,7 @@ public abstract class AbstractStorageTest {
     public void updateExist() throws Exception {
         Resume copyResume1 = new Resume("uuid1", "fullName1");
         storage.update(copyResume1);
-        Assert.assertEquals(storage.get("uuid1"), copyResume1);
+        Assert.assertEquals(storage.get("uuid1").toString(), copyResume1.toString().trim());
     }
 
     @Test
@@ -185,9 +186,9 @@ public abstract class AbstractStorageTest {
     public void getAllSorted() throws Exception {
         List<Resume> list = storage.getAllSorted();
 
-        Assert.assertEquals(list.get(0).getUuid(), resume1.getUuid());
-        Assert.assertEquals(list.get(1).getUuid(), resume2.getUuid());
-        Assert.assertEquals(list.get(2).getUuid(), resume3.getUuid());
+        Assert.assertEquals(list.get(0).getUuid().trim(), resume1.getUuid().trim());
+        Assert.assertEquals(list.get(1).getUuid().trim(), resume2.getUuid().trim());
+        Assert.assertEquals(list.get(2).getUuid().trim(), resume3.getUuid().trim());
     }
 
 }

@@ -2,6 +2,126 @@
 <resume>
     <uuid>uuid1</uuid>
     <fullName>fullName1</fullName>
-    <contacts/>
-    <sections/>
+    <contacts>
+        <entry>
+            <key>TELEPHONE</key>
+            <value>Мобилка 0</value>
+        </entry>
+        <entry>
+            <key>SKYPE</key>
+            <value>Скуре 0</value>
+        </entry>
+        <entry>
+            <key>MAIL</key>
+            <value>Мыло 0</value>
+        </entry>
+        <entry>
+            <key>LINKEDIN</key>
+            <value>Линкин 0</value>
+        </entry>
+        <entry>
+            <key>GITHUB</key>
+            <value>Хаб 0</value>
+        </entry>
+        <entry>
+            <key>STATCKOVERFLOW</key>
+            <value>Стак 0</value>
+        </entry>
+        <entry>
+            <key>HOMEPAGE</key>
+            <value>Домашняя страница 0</value>
+        </entry>
+    </contacts>
+    <sections>
+        <entry>
+            <key>PERSONAL</key>
+            <value xsi:type="textSection" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                <text>Паровозик0</text>
+            </value>
+        </entry>
+        <entry>
+            <key>OBJECTIVE</key>
+            <value xsi:type="textSection" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                <text>Позитивная0</text>
+            </value>
+        </entry>
+        <entry>
+            <key>ACHIEVEMENT</key>
+            <value xsi:type="listSection" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                <list>Leeroy0</list>
+                <list>Jenkins0</list>
+            </value>
+        </entry>
+        <entry>
+            <key>QUALIFICATIONS</key>
+            <value xsi:type="listSection" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                <list>digging manager0</list>
+                <list>not digging top  manager0</list>
+            </value>
+        </entry>
+        <entry>
+            <key>EXPERIENCE</key>
+            <value xsi:type="organizationSection" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                <organizations>
+                    <homePage>
+                        <name>Рога и копыта0</name>
+                        <link>РогаИКопыта.РФ+i</link>
+                    </homePage>
+                    <positions>
+                        <startDate>2018-11-06</startDate>
+                        <endDate>2018-11-06</endDate>
+                        <title>ПарадМенеджер0</title>
+                        <description>Описание0</description>
+                    </positions>
+                </organizations>
+                <organizations>
+                    <homePage>
+                        <name>ШахматныйТурнир0</name>
+                        <link>Васюки.РФ+i</link>
+                    </homePage>
+                    <positions>
+                        <startDate>2018-11-06</startDate>
+                        <endDate>2018-11-06</endDate>
+                        <title>КомбинаторМенеджер0</title>
+                        <description>Описание0</description>
+                    </positions>
+                </organizations>
+            </value>
+        </entry>
+        <entry>
+            <key>EDUCATION</key>
+            <value xsi:type="organizationSection" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                <organizations>
+                    <homePage>
+                        <name>Школа №0</name>
+                        <link>нет</link>
+                    </homePage>
+                    <positions>
+                        <startDate>2018-11-06</startDate>
+                        <endDate>2018-11-06</endDate>
+                        <title>Отпетый Ботан 0</title>
+                        <description>С борордой0</description>
+                    </positions>
+                </organizations>
+                <organizations>
+                    <homePage>
+                        <name>Тракторный завод имени Васюткина0</name>
+                        <link>SpBsmdb.РФ0</link>
+                    </homePage>
+                    <positions>
+                        <startDate>2018-11-06</startDate>
+                        <endDate>2018-11-06</endDate>
+                        <title>Брутальный Магистр.0</title>
+                        <description>С борордой0</description>
+                    </positions>
+                    <positions>
+                        <startDate>2018-11-06</startDate>
+                        <endDate>2018-11-06</endDate>
+                        <title>Мегалютый Аспирант0</title>
+                        <description>С борордой0</description>
+                    </positions>
+                </organizations>
+            </value>
+        </entry>
+    </sections>
 </resume>
